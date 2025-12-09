@@ -24,8 +24,9 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             min-height: 100vh;
-            padding: 15px;
+            padding: 10px;
             color: #333;
             position: relative;
             overflow-x: hidden;
@@ -50,24 +51,24 @@
         /* Thêm hình trang trí ở các góc */
         .decoration {
             position: fixed;
-            width: 120px;
-            height: 120px;
+            width: 80px;
+            height: 80px;
             z-index: -1;
             pointer-events: none;
             opacity: 0.2;
         }
         
         .decoration.top-left {
-            top: 10px;
-            left: 10px;
+            top: 5px;
+            left: 5px;
             background-image: url('https://cdn-icons-png.flaticon.com/512/4323/4323003.png');
             background-size: contain;
             background-repeat: no-repeat;
         }
         
         .decoration.bottom-right {
-            bottom: 10px;
-            right: 10px;
+            bottom: 5px;
+            right: 5px;
             background-image: url('https://cdn-icons-png.flaticon.com/512/4323/4323018.png');
             background-size: contain;
             background-repeat: no-repeat;
@@ -75,32 +76,31 @@
         }
         
         .container {
-            max-width: 1100px;
+            max-width: 1000px;
             width: 100%;
             background: linear-gradient(145deg, #ffffff, #f0f9ff);
-            border-radius: 25px;
+            border-radius: 20px;
             box-shadow: 0 15px 35px rgba(255, 107, 107, 0.2),
                         0 5px 15px rgba(74, 144, 226, 0.1),
-                        inset 0 0 0 8px #ffd166;
-            padding: 25px 20px;
-            margin-top: 10px;
+                        inset 0 0 0 6px #ffd166;
+            padding: 20px 15px;
             z-index: 1;
             position: relative;
-            border: 8px solid white;
+            border: 6px solid white;
         }
         
         /* Header đẹp mắt */
         .header {
             text-align: center;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
             position: relative;
-            padding: 0 10px;
+            padding: 0 5px;
         }
         
         h1 {
             color: #ff6b6b;
-            font-size: 2.8rem;
-            margin-bottom: 8px;
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            margin-bottom: 5px;
             text-shadow: 3px 3px 0px rgba(255, 107, 107, 0.2),
                          5px 5px 0px rgba(255, 209, 102, 0.2);
             letter-spacing: 1px;
@@ -111,20 +111,20 @@
         }
         
         .title-icon {
-            font-size: 2.5rem;
+            font-size: clamp(1.8rem, 4vw, 2.2rem);
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
             animation: bounce 2s infinite;
         }
         
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-8px); }
         }
         
         .subtitle {
             color: #4a90e2;
-            font-size: 1.4rem;
+            font-size: clamp(1rem, 3vw, 1.3rem);
             margin-bottom: 5px;
             font-weight: bold;
             background: linear-gradient(45deg, #4a90e2, #06d6a0);
@@ -136,9 +136,10 @@
         .game-area {
             display: flex;
             flex-direction: row;
-            gap: 40px;
-            margin-bottom: 30px;
+            gap: 15px;
+            margin-bottom: 20px;
             align-items: flex-start;
+            flex-wrap: wrap;
         }
         
         /* Phần câu hỏi bên trái */
@@ -146,7 +147,8 @@
             flex: 2;
             display: flex;
             flex-direction: column;
-            gap: 25px;
+            gap: 12px;
+            min-width: 0;
         }
         
         /* Phần keywords bên phải */
@@ -154,21 +156,21 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 12px;
             background: linear-gradient(145deg, #fff9e6, #fff0cc);
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(255, 209, 102, 0.3),
-                        inset 0 0 0 4px #ffd166;
-            border: 4px solid white;
-            min-width: 280px;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(255, 209, 102, 0.3),
+                        inset 0 0 0 3px #ffd166;
+            border: 3px solid white;
+            min-width: 180px;
         }
         
         .keywords-title {
             text-align: center;
-            font-size: 1.6rem;
+            font-size: clamp(1.2rem, 3vw, 1.4rem);
             color: #ff8a00;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             font-weight: bold;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
             background: linear-gradient(45deg, #ff8a00, #ff6b6b);
@@ -182,20 +184,20 @@
             display: flex;
             align-items: center;
             background: linear-gradient(145deg, #ffffff, #e8f4ff);
-            border: 4px solid #a0d0ff;
-            border-radius: 20px;
-            padding: 20px;
+            border: 3px solid #a0d0ff;
+            border-radius: 15px;
+            padding: 12px;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
-            box-shadow: 0 8px 20px rgba(160, 208, 255, 0.3);
-            min-height: 160px;
+            box-shadow: 0 6px 15px rgba(160, 208, 255, 0.3);
+            min-height: 100px;
         }
         
         .question-item.drag-over {
             background: linear-gradient(145deg, #e8f4ff, #d4eaff);
             border-color: #4a90e2;
-            box-shadow: 0 12px 25px rgba(74, 144, 226, 0.4);
-            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(74, 144, 226, 0.4);
+            transform: translateY(-2px);
         }
         
         .question-item.correct {
@@ -214,21 +216,21 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
-            margin-right: 25px;
+            gap: 6px;
+            margin-right: 12px;
         }
         
         .image-container {
-            width: 120px;
-            height: 120px;
+            width: clamp(70px, 10vw, 90px);
+            height: clamp(70px, 10vw, 90px);
             display: flex;
             align-items: center;
             justify-content: center;
             background: white;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
             overflow: hidden;
-            border: 5px solid white;
+            border: 4px solid white;
             position: relative;
         }
         
@@ -240,19 +242,19 @@
             right: -3px;
             bottom: -3px;
             background: linear-gradient(45deg, #ff6b6b, #ffd166, #06d6a0, #4a90e2);
-            border-radius: 17px;
+            border-radius: 15px;
             z-index: -1;
         }
         
         .image-container img {
-            width: 90%;
-            height: 90%;
+            width: 85%;
+            height: 85%;
             object-fit: contain;
             transition: transform 0.3s;
         }
         
         .image-label {
-            font-size: 1.2rem;
+            font-size: clamp(0.8rem, 2vw, 1rem);
             color: #4a90e2;
             font-weight: bold;
             text-align: center;
@@ -264,19 +266,21 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 0 20px;
+            padding: 0 10px;
+            min-width: 0;
         }
         
         .question {
-            font-size: 2.5rem;
+            font-size: clamp(1.4rem, 3vw, 2rem);
             color: #333;
             font-weight: bold;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-            margin-bottom: 10px;
+            margin-bottom: 5px;
+            word-break: break-word;
         }
         
         .question-hint {
-            font-size: 1.2rem;
+            font-size: clamp(0.8rem, 2vw, 1rem);
             color: #ff6b6b;
             font-weight: bold;
         }
@@ -287,78 +291,78 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
-            margin-left: 15px;
+            gap: 5px;
+            margin-left: 8px;
         }
         
         .answer-label {
-            font-size: 1.2rem;
+            font-size: clamp(0.8rem, 2vw, 1rem);
             color: #4a90e2;
             font-weight: bold;
             text-align: center;
         }
         
         .answer-slot {
-            width: 85px;
-            height: 85px;
-            border-radius: 20px;
+            width: clamp(55px, 8vw, 70px);
+            height: clamp(55px, 8vw, 70px);
+            border-radius: 15px;
             background: linear-gradient(145deg, #e8f4ff, #d4eaff);
-            border: 3px solid #4a90e2;
+            border: 2px solid #4a90e2;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.8rem;
+            font-size: clamp(1.8rem, 3vw, 2.2rem);
             font-weight: bold;
             color: #4a90e2;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: inset 0 0 10px rgba(74, 144, 226, 0.2);
+            box-shadow: inset 0 0 8px rgba(74, 144, 226, 0.2);
         }
         
         .answer-slot.filled {
             background: linear-gradient(145deg, #c8e6ff, #a8d4ff);
             transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(74, 144, 226, 0.4);
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4);
         }
         
-        /* Các keyword bên phải */
+        /* Các keyword bên phải - THỨ TỰ: T > C > I */
         .keywords-grid {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 12px;
         }
         
         .keyword-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 10px;
-            padding: 15px;
+            gap: 6px;
+            padding: 10px;
             background: linear-gradient(145deg, #ffffff, #fff9e6);
-            border-radius: 15px;
-            border: 3px solid #ffd166;
+            border-radius: 12px;
+            border: 2px solid #ffd166;
         }
         
         .keyword-label {
-            font-size: 1.2rem;
+            font-size: clamp(0.8rem, 2vw, 1rem);
             color: #ff8a00;
             font-weight: bold;
             text-align: center;
         }
         
         .keyword-slot {
-            width: 85px;
-            height: 85px;
-            border-radius: 20px;
+            width: clamp(55px, 8vw, 70px);
+            height: clamp(55px, 8vw, 70px);
+            border-radius: 15px;
             background: linear-gradient(145deg, #ffd166, #ffc145);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.8rem;
+            font-size: clamp(1.8rem, 3vw, 2.2rem);
             font-weight: bold;
             color: #333;
             cursor: grab;
-            box-shadow: 0 10px 20px rgba(255, 209, 102, 0.4),
-                        0 0 0 4px white;
+            box-shadow: 0 6px 15px rgba(255, 209, 102, 0.4),
+                        0 0 0 3px white;
             user-select: none;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
@@ -369,12 +373,12 @@
         .keyword-slot::before {
             content: '';
             position: absolute;
-            top: -4px;
-            left: -4px;
-            right: -4px;
-            bottom: -4px;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
             background: linear-gradient(45deg, #ff6b6b, #ffd166, #06d6a0, #4a90e2);
-            border-radius: 23px;
+            border-radius: 18px;
             z-index: -1;
             opacity: 0;
             transition: opacity 0.3s;
@@ -386,9 +390,9 @@
         }
         
         .keyword-slot:hover {
-            transform: translateY(-5px) rotate(3deg);
-            box-shadow: 0 15px 30px rgba(255, 209, 102, 0.6),
-                        0 0 0 4px white;
+            transform: translateY(-4px) rotate(3deg);
+            box-shadow: 0 10px 20px rgba(255, 209, 102, 0.6),
+                        0 0 0 3px white;
         }
         
         .keyword-slot:active {
@@ -398,7 +402,7 @@
         
         .keyword-slot.dragging {
             opacity: 0.9;
-            box-shadow: 0 20px 40px rgba(255, 209, 102, 0.7);
+            box-shadow: 0 15px 30px rgba(255, 209, 102, 0.7);
             z-index: 10000;
         }
         
@@ -406,7 +410,7 @@
             opacity: 0.3;
             cursor: default;
             transform: none;
-            box-shadow: 0 5px 10px rgba(255, 209, 102, 0.2);
+            box-shadow: 0 4px 8px rgba(255, 209, 102, 0.2);
         }
         
         .keyword-slot.used::before {
@@ -416,14 +420,14 @@
         /* Phần feedback và điều khiển */
         .feedback {
             text-align: center;
-            margin: 25px 0;
-            min-height: 50px;
-            font-size: 1.5rem;
+            margin: 20px 0;
+            min-height: 45px;
+            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
             font-weight: bold;
-            padding: 15px;
-            border-radius: 15px;
+            padding: 12px;
+            border-radius: 12px;
             transition: all 0.3s;
-            border: 3px solid transparent;
+            border: 2px solid transparent;
         }
         
         .correct {
@@ -447,22 +451,23 @@
         .controls {
             display: flex;
             justify-content: center;
-            gap: 25px;
-            margin-top: 25px;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
         }
         
         button {
-            padding: 18px 35px;
-            font-size: 1.4rem;
+            padding: 12px 25px;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
             border: none;
-            border-radius: 50px;
+            border-radius: 40px;
             cursor: pointer;
             font-weight: bold;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
-            min-width: 160px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            min-width: 120px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
         
         button::after {
@@ -487,8 +492,8 @@
         }
         
         #check-btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 35px rgba(74, 144, 226, 0.5);
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 12px 25px rgba(74, 144, 226, 0.5);
         }
         
         #reset-btn {
@@ -497,37 +502,37 @@
         }
         
         #reset-btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 35px rgba(255, 154, 118, 0.5);
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 12px 25px rgba(255, 154, 118, 0.5);
         }
         
         .timer {
             text-align: center;
-            margin-top: 20px;
-            font-size: 1.5rem;
+            margin-top: 15px;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
             color: #666;
             font-weight: bold;
             background: linear-gradient(145deg, #ffffff, #f0f9ff);
-            padding: 15px;
-            border-radius: 15px;
-            border: 3px solid #ffd166;
+            padding: 12px;
+            border-radius: 12px;
+            border: 2px solid #ffd166;
         }
         
         .timer span {
             color: #ff6b6b;
-            font-size: 1.8rem;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
             text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
         
         .instructions {
             background: linear-gradient(145deg, #e8f4ff, #d4eaff);
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 25px;
-            font-size: 1.3rem;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            font-size: clamp(1rem, 2.5vw, 1.1rem);
             color: #4a90e2;
             text-align: center;
-            border: 4px solid #4a90e2;
+            border: 3px solid #4a90e2;
             position: relative;
             overflow: hidden;
         }
@@ -535,61 +540,71 @@
         .instructions::before {
             content: '💡';
             position: absolute;
-            top: 10px;
-            left: 15px;
-            font-size: 1.8rem;
+            top: 8px;
+            left: 10px;
+            font-size: 1.2rem;
         }
         
         .audio-controls {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
+            gap: 10px;
+            margin-top: 15px;
         }
         
         .audio-btn {
-            padding: 12px 25px;
-            font-size: 1.1rem;
+            padding: 10px 20px;
+            font-size: clamp(0.8rem, 2vw, 1rem);
             background: linear-gradient(145deg, #9d4edd, #8a2be2);
             color: white;
-            border-radius: 30px;
+            border-radius: 25px;
             border: none;
             cursor: pointer;
-            box-shadow: 0 8px 20px rgba(157, 78, 221, 0.3);
+            box-shadow: 0 6px 15px rgba(157, 78, 221, 0.3);
             transition: all 0.3s;
         }
         
         .audio-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 12px 25px rgba(157, 78, 221, 0.4);
+            box-shadow: 0 10px 20px rgba(157, 78, 221, 0.4);
         }
         
         /* Thêm hiệu ứng cho chữ cái khi kéo */
         .drag-ghost {
             position: fixed;
-            width: 85px;
-            height: 85px;
-            border-radius: 20px;
+            width: clamp(55px, 8vw, 70px);
+            height: clamp(55px, 8vw, 70px);
+            border-radius: 15px;
             background: linear-gradient(145deg, #ffd166, #ffc145);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.8rem;
+            font-size: clamp(1.8rem, 3vw, 2.2rem);
             font-weight: bold;
             color: #333;
             pointer-events: none;
             z-index: 10000;
-            box-shadow: 0 20px 40px rgba(255, 209, 102, 0.7);
+            box-shadow: 0 15px 30px rgba(255, 209, 102, 0.7);
             transform: translate(-50%, -50%);
             opacity: 0.95;
             transition: transform 0.1s;
         }
         
         /* Responsive cho mobile và tablet */
-        @media (max-width: 992px) {
+        @media (max-width: 768px) {
+            body {
+                padding: 8px;
+                justify-content: flex-start;
+            }
+            
+            .container {
+                padding: 15px 10px;
+                border-width: 4px;
+            }
+            
             .game-area {
                 flex-direction: column;
-                gap: 30px;
+                gap: 20px;
             }
             
             .questions-section, .keywords-section {
@@ -598,176 +613,142 @@
             
             .keywords-section {
                 min-width: auto;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-            
-            .container {
-                padding: 20px 15px;
-                border-width: 6px;
-            }
-            
-            h1 {
-                font-size: 2.2rem;
-            }
-            
-            .subtitle {
-                font-size: 1.2rem;
+                padding: 12px;
             }
             
             .question-item {
-                flex-direction: column;
-                padding: 15px;
-                gap: 20px;
+                padding: 10px;
+                gap: 10px;
                 min-height: auto;
             }
             
             .question-image {
-                margin-right: 0;
-                margin-bottom: 10px;
-            }
-            
-            .question-text {
-                padding: 0;
-                align-items: center;
-                text-align: center;
-            }
-            
-            .question {
-                font-size: 2rem;
-                margin-bottom: 5px;
-            }
-            
-            .question-hint {
-                font-size: 1.1rem;
-            }
-            
-            .answer-slot-container {
-                margin-left: 0;
-                margin-top: 10px;
+                margin-right: 8px;
             }
             
             .image-container {
-                width: 100px;
-                height: 100px;
-            }
-            
-            .keyword-slot, .answer-slot {
                 width: 70px;
                 height: 70px;
-                font-size: 2.4rem;
             }
             
-            .drag-ghost {
-                width: 70px;
-                height: 70px;
-                font-size: 2.4rem;
+            .question-text {
+                padding: 0 8px;
             }
             
-            button {
-                padding: 15px 25px;
-                font-size: 1.2rem;
-                min-width: 140px;
-            }
-            
-            .timer {
-                font-size: 1.3rem;
-                padding: 12px;
-            }
-            
-            .timer span {
+            .question {
                 font-size: 1.6rem;
             }
             
-            .decoration {
-                width: 80px;
-                height: 80px;
+            .keywords-grid {
+                flex-direction: row;
+                justify-content: center;
+                gap: 15px;
             }
             
-            .image-label, .answer-label, .keyword-label {
-                font-size: 1.1rem;
-            }
-            
-            .keywords-section {
-                padding: 20px;
+            .keyword-item {
+                flex: 1;
+                max-width: 120px;
             }
         }
         
         @media (max-width: 480px) {
-            h1 {
-                font-size: 1.8rem;
+            .question-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 12px;
             }
             
-            .title-icon {
-                font-size: 2rem;
+            .question-image {
+                margin-right: 0;
+                margin-bottom: 8px;
             }
             
-            .image-container {
-                width: 90px;
-                height: 90px;
+            .question-text {
+                padding: 0;
             }
             
-            .question {
-                font-size: 1.8rem;
+            .answer-slot-container {
+                margin-left: 0;
+                margin-top: 8px;
             }
             
-            .keyword-slot, .answer-slot {
-                width: 65px;
-                height: 65px;
-                font-size: 2.2rem;
+            .keywords-grid {
+                flex-direction: column;
             }
             
-            .drag-ghost {
-                width: 65px;
-                height: 65px;
-                font-size: 2.2rem;
+            .keyword-item {
+                max-width: none;
             }
             
             .controls {
-                flex-direction: column;
-                align-items: center;
-                gap: 15px;
+                gap: 10px;
             }
             
             button {
-                width: 100%;
-                max-width: 300px;
-            }
-            
-            .keywords-title {
-                font-size: 1.4rem;
+                padding: 10px 20px;
+                min-width: 100px;
             }
         }
         
         /* Landscape mode */
-        @media (max-height: 600px) and (orientation: landscape) {
+        @media (max-height: 500px) and (orientation: landscape) {
+            body {
+                padding: 5px;
+            }
+            
             .container {
-                padding: 15px;
+                padding: 10px;
             }
             
             .question-item {
-                flex-direction: row;
-                padding: 12px;
-                min-height: 120px;
+                min-height: 80px;
+                padding: 8px;
             }
             
             .image-container {
-                width: 80px;
-                height: 80px;
+                width: 60px;
+                height: 60px;
             }
             
             .question {
-                font-size: 1.6rem;
+                font-size: 1.4rem;
             }
             
             .keyword-slot, .answer-slot {
+                width: 50px;
+                height: 50px;
+                font-size: 1.6rem;
+            }
+            
+            .keywords-grid {
+                flex-direction: row;
+                gap: 10px;
+            }
+        }
+        
+        /* Very small screens */
+        @media (max-width: 320px) {
+            .question-item {
+                padding: 8px;
+            }
+            
+            .image-container {
                 width: 60px;
                 height: 60px;
-                font-size: 2rem;
+            }
+            
+            .question {
+                font-size: 1.3rem;
+            }
+            
+            .keyword-slot, .answer-slot {
+                width: 50px;
+                height: 50px;
+                font-size: 1.6rem;
+            }
+            
+            .keywords-title {
+                font-size: 1.1rem;
             }
         }
     </style>
@@ -798,7 +779,6 @@
                                  alt="Con gà" 
                                  loading="lazy">
                         </div>
-                        <div class="image-label">Con gà</div>
                     </div>
                     
                     <div class="question-text">
@@ -820,12 +800,11 @@
                                  alt="In màu" 
                                  loading="lazy">
                         </div>
-                        <div class="image-label">In màu</div>
                     </div>
                     
                     <div class="question-text">
                         <div class="question">...n màu</div>
-                        <div class="question-hint">Điền chữ cái còn thiếu</div>
+                        <div class="question-hint">Tìm chữ cái còn thiếu</div>
                     </div>
                     
                     <div class="answer-slot-container">
@@ -842,12 +821,11 @@
                                  alt="Tàu hỏa" 
                                  loading="lazy">
                         </div>
-                        <div class="image-label">Tàu hỏa</div>
                     </div>
                     
                     <div class="question-text">
                         <div class="question">...àu hỏa</div>
-                        <div class="question-hint">Điền chữ cái còn thiếu</div>
+                        <div class="question-hint">Tìm chữ cái còn thiếu</div>
                     </div>
                     
                     <div class="answer-slot-container">
@@ -857,23 +835,23 @@
                 </div>
             </div>
             
-            <!-- Phần keywords bên phải -->
+            <!-- Phần keywords bên phải - THỨ TỰ: T > C > I -->
             <div class="keywords-section">
-                <div class="keywords-title">Kéo & thả chữ vào ô đúng</div>
+                <div class="keywords-title">Chữ cái gợi ý</div>
                 <div class="keywords-grid">
-                    <!-- Keyword 1 -->
+                    <!-- Keyword 1: T (Tàu hỏa) -->
                     <div class="keyword-item">
-                        <div class="keyword-slot" id="keyword-1" data-letter="c">T</div>
+                        <div class="keyword-slot" id="keyword-3" data-letter="t">T</div>
                     </div>
                     
-                    <!-- Keyword 2 -->
+                    <!-- Keyword 2: C (Con gà) -->
                     <div class="keyword-item">
-                        <div class="keyword-slot" id="keyword-2" data-letter="i">C</div>
+                        <div class="keyword-slot" id="keyword-1" data-letter="c">C</div>
                     </div>
                     
-                    <!-- Keyword 3 -->
+                    <!-- Keyword 3: I (In màu) -->
                     <div class="keyword-item">
-                        <div class="keyword-slot" id="keyword-3" data-letter="t">I</div>
+                        <div class="keyword-slot" id="keyword-2" data-letter="i">I</div>
                     </div>
                 </div>
             </div>
@@ -1237,11 +1215,11 @@
         function createConfetti() {
             const colors = ['#ff6b6b', '#4a90e2', '#06d6a0', '#ffd166', '#9d4edd'];
             
-            for (let i = 0; i < 50; i++) {
+            for (let i = 0; i < 30; i++) {
                 const confetti = document.createElement('div');
                 confetti.style.position = 'fixed';
-                confetti.style.width = '10px';
-                confetti.style.height = '10px';
+                confetti.style.width = '8px';
+                confetti.style.height = '8px';
                 confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
                 confetti.style.borderRadius = '50%';
                 confetti.style.left = Math.random() * 100 + 'vw';
@@ -1256,7 +1234,7 @@
                     { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
                     { transform: `translateY(${window.innerHeight + 100}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
                 ], {
-                    duration: 2000 + Math.random() * 2000,
+                    duration: 1500 + Math.random() * 1500,
                     easing: 'cubic-bezier(0.215, 0.610, 0.355, 1)'
                 });
                 
@@ -1282,7 +1260,7 @@
                     oscillator.frequency.setValueAtTime(659.25, audioContext.currentTime + 0.1); // E5
                     oscillator.frequency.setValueAtTime(783.99, audioContext.currentTime + 0.2); // G5
                     oscillator.frequency.setValueAtTime(1046.50, audioContext.currentTime + 0.3); // C6
-                    gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+                    gainNode.gain.setValueAtTime(0.15, audioContext.currentTime);
                     oscillator.start();
                     oscillator.stop(audioContext.currentTime + 0.5);
                     break;
@@ -1292,7 +1270,7 @@
                     oscillator.frequency.setValueAtTime(392.00, audioContext.currentTime); // G4
                     oscillator.frequency.setValueAtTime(349.23, audioContext.currentTime + 0.1); // F4
                     oscillator.frequency.setValueAtTime(392.00, audioContext.currentTime + 0.2); // G4
-                    gainNode.gain.setValueAtTime(0.15, audioContext.currentTime);
+                    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
                     oscillator.start();
                     oscillator.stop(audioContext.currentTime + 0.4);
                     break;
@@ -1300,7 +1278,7 @@
                 case 'place':
                     // Âm thanh khi đặt chữ cái
                     oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime); // C5
-                    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                    gainNode.gain.setValueAtTime(0.08, audioContext.currentTime);
                     gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
                     oscillator.start();
                     oscillator.stop(audioContext.currentTime + 0.3);
