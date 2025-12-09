@@ -26,10 +26,15 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            padding: 10px;
+            min-height: -webkit-fill-available;
+            padding: 5px;
             color: #333;
-            position: relative;
-            overflow-x: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
             touch-action: pan-y;
         }
         
@@ -41,114 +46,121 @@
             width: 100%;
             height: 100%;
             background-image: url('https://img.freepik.com/free-vector/cute-animals-seamless-pattern_42750-613.jpg');
-            background-size: 300px;
+            background-size: 250px;
             background-position: center;
-            opacity: 0.15;
+            opacity: 0.1;
             z-index: -1;
             pointer-events: none;
-        }
-        
-        /* Thêm hình trang trí ở các góc */
-        .decoration {
-            position: fixed;
-            width: 80px;
-            height: 80px;
-            z-index: -1;
-            pointer-events: none;
-            opacity: 0.2;
-        }
-        
-        .decoration.top-left {
-            top: 5px;
-            left: 5px;
-            background-image: url('https://cdn-icons-png.flaticon.com/512/4323/4323003.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-        }
-        
-        .decoration.bottom-right {
-            bottom: 5px;
-            right: 5px;
-            background-image: url('https://cdn-icons-png.flaticon.com/512/4323/4323018.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            transform: rotate(180deg);
         }
         
         .container {
-            max-width: 1000px;
             width: 100%;
+            height: 100%;
+            max-width: 100%;
+            max-height: 100%;
             background: linear-gradient(145deg, #ffffff, #f0f9ff);
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(255, 107, 107, 0.2),
-                        0 5px 15px rgba(74, 144, 226, 0.1),
-                        inset 0 0 0 6px #ffd166;
-            padding: 20px 15px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.2),
+                        0 3px 10px rgba(74, 144, 226, 0.1),
+                        inset 0 0 0 4px #ffd166;
+            padding: 10px;
             z-index: 1;
             position: relative;
-            border: 6px solid white;
+            border: 4px solid white;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
         }
         
-        /* Header đẹp mắt */
+        /* Header đẹp mắt - thu nhỏ lại */
         .header {
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 5px;
             position: relative;
             padding: 0 5px;
+            flex-shrink: 0;
         }
         
         h1 {
             color: #ff6b6b;
-            font-size: clamp(1.8rem, 5vw, 2.5rem);
-            margin-bottom: 5px;
-            text-shadow: 3px 3px 0px rgba(255, 107, 107, 0.2),
-                         5px 5px 0px rgba(255, 209, 102, 0.2);
-            letter-spacing: 1px;
+            font-size: 1.4rem;
+            margin-bottom: 3px;
+            text-shadow: 2px 2px 0px rgba(255, 107, 107, 0.2),
+                         3px 3px 0px rgba(255, 209, 102, 0.2);
+            letter-spacing: 0.5px;
             background: linear-gradient(45deg, #ff6b6b, #ff8a00);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            line-height: 1.2;
         }
         
         .title-icon {
-            font-size: clamp(1.8rem, 4vw, 2.2rem);
+            font-size: 1.3rem;
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
             animation: bounce 2s infinite;
         }
         
         @keyframes bounce {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
+            50% { transform: translateY(-5px); }
         }
         
         .subtitle {
             color: #4a90e2;
-            font-size: clamp(1rem, 3vw, 1.3rem);
-            margin-bottom: 5px;
+            font-size: 0.9rem;
+            margin-bottom: 3px;
             font-weight: bold;
             background: linear-gradient(45deg, #4a90e2, #06d6a0);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            line-height: 1.1;
+        }
+        
+        .instructions {
+            background: linear-gradient(145deg, #e8f4ff, #d4eaff);
+            padding: 6px 8px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            font-size: 0.8rem;
+            color: #4a90e2;
+            text-align: center;
+            border: 2px solid #4a90e2;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+            line-height: 1.1;
+        }
+        
+        .instructions::before {
+            content: '💡';
+            position: absolute;
+            top: 5px;
+            left: 8px;
+            font-size: 0.9rem;
         }
         
         .game-area {
             display: flex;
             flex-direction: row;
-            gap: 15px;
-            margin-bottom: 20px;
-            align-items: flex-start;
-            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 8px;
+            align-items: stretch;
+            flex: 1;
+            min-height: 0;
+            overflow: hidden;
         }
         
         /* Phần câu hỏi bên trái */
         .questions-section {
-            flex: 2;
+            flex: 3;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 6px;
             min-width: 0;
+            overflow: hidden;
         }
         
         /* Phần keywords bên phải */
@@ -156,48 +168,51 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 6px;
             background: linear-gradient(145deg, #fff9e6, #fff0cc);
-            padding: 15px;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(255, 209, 102, 0.3),
-                        inset 0 0 0 3px #ffd166;
-            border: 3px solid white;
-            min-width: 180px;
+            padding: 8px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(255, 209, 102, 0.3),
+                        inset 0 0 0 2px #ffd166;
+            border: 2px solid white;
+            min-width: 0;
+            max-width: 120px;
         }
         
         .keywords-title {
             text-align: center;
-            font-size: clamp(1.2rem, 3vw, 1.4rem);
+            font-size: 0.9rem;
             color: #ff8a00;
-            margin-bottom: 10px;
+            margin-bottom: 6px;
             font-weight: bold;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
             background: linear-gradient(45deg, #ff8a00, #ff6b6b);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            line-height: 1.1;
         }
         
-        /* Mỗi câu hỏi */
+        /* Mỗi câu hỏi - rất gọn */
         .question-item {
             display: flex;
             align-items: center;
             background: linear-gradient(145deg, #ffffff, #e8f4ff);
-            border: 3px solid #a0d0ff;
-            border-radius: 15px;
-            padding: 12px;
+            border: 2px solid #a0d0ff;
+            border-radius: 10px;
+            padding: 6px;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
-            box-shadow: 0 6px 15px rgba(160, 208, 255, 0.3);
-            min-height: 100px;
+            box-shadow: 0 3px 8px rgba(160, 208, 255, 0.3);
+            min-height: 60px;
+            flex-shrink: 0;
         }
         
         .question-item.drag-over {
             background: linear-gradient(145deg, #e8f4ff, #d4eaff);
             border-color: #4a90e2;
-            box-shadow: 0 8px 20px rgba(74, 144, 226, 0.4);
-            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(74, 144, 226, 0.4);
+            transform: translateY(-1px);
         }
         
         .question-item.correct {
@@ -210,54 +225,55 @@
             background: linear-gradient(145deg, #ffc9d5, #ffb5c8);
         }
         
-        /* Phần hình ảnh trong câu hỏi */
+        /* Phần hình ảnh trong câu hỏi - nhỏ gọn */
         .question-image {
             flex: 0 0 auto;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 6px;
-            margin-right: 12px;
+            gap: 3px;
+            margin-right: 6px;
         }
         
         .image-container {
-            width: clamp(70px, 10vw, 90px);
-            height: clamp(70px, 10vw, 90px);
+            width: 50px;
+            height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
             background: white;
-            border-radius: 12px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            border-radius: 8px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
             overflow: hidden;
-            border: 4px solid white;
+            border: 3px solid white;
             position: relative;
         }
         
         .image-container::after {
             content: '';
             position: absolute;
-            top: -3px;
-            left: -3px;
-            right: -3px;
-            bottom: -3px;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
             background: linear-gradient(45deg, #ff6b6b, #ffd166, #06d6a0, #4a90e2);
-            border-radius: 15px;
+            border-radius: 10px;
             z-index: -1;
         }
         
         .image-container img {
-            width: 85%;
-            height: 85%;
+            width: 80%;
+            height: 80%;
             object-fit: contain;
             transition: transform 0.3s;
         }
         
         .image-label {
-            font-size: clamp(0.8rem, 2vw, 1rem);
+            font-size: 0.65rem;
             color: #4a90e2;
             font-weight: bold;
             text-align: center;
+            line-height: 0.9;
         }
         
         /* Phần từ gợi ý trong câu hỏi */
@@ -266,23 +282,25 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 0 10px;
+            padding: 0 6px;
             min-width: 0;
         }
         
         .question {
-            font-size: clamp(1.4rem, 3vw, 2rem);
+            font-size: 1.2rem;
             color: #333;
             font-weight: bold;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-            margin-bottom: 5px;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+            margin-bottom: 2px;
             word-break: break-word;
+            line-height: 1.1;
         }
         
         .question-hint {
-            font-size: clamp(0.8rem, 2vw, 1rem);
+            font-size: 0.65rem;
             color: #ff6b6b;
             font-weight: bold;
+            line-height: 0.9;
         }
         
         /* Ô trống trong câu hỏi */
@@ -291,78 +309,83 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 5px;
-            margin-left: 8px;
+            gap: 3px;
+            margin-left: 4px;
         }
         
         .answer-label {
-            font-size: clamp(0.8rem, 2vw, 1rem);
+            font-size: 0.65rem;
             color: #4a90e2;
             font-weight: bold;
             text-align: center;
+            line-height: 0.9;
         }
         
         .answer-slot {
-            width: clamp(55px, 8vw, 70px);
-            height: clamp(55px, 8vw, 70px);
-            border-radius: 15px;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
             background: linear-gradient(145deg, #e8f4ff, #d4eaff);
-            border: 2px solid #4a90e2;
+            border: 1.5px solid #4a90e2;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: clamp(1.8rem, 3vw, 2.2rem);
+            font-size: 1.3rem;
             font-weight: bold;
             color: #4a90e2;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: inset 0 0 8px rgba(74, 144, 226, 0.2);
+            box-shadow: inset 0 0 5px rgba(74, 144, 226, 0.2);
         }
         
         .answer-slot.filled {
             background: linear-gradient(145deg, #c8e6ff, #a8d4ff);
             transform: scale(1.05);
-            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4);
+            box-shadow: 0 2px 6px rgba(74, 144, 226, 0.4);
         }
         
         /* Các keyword bên phải - THỨ TỰ: T > C > I */
         .keywords-grid {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 6px;
+            flex: 1;
+            justify-content: space-around;
         }
         
         .keyword-item {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 6px;
-            padding: 10px;
+            gap: 3px;
+            padding: 6px;
             background: linear-gradient(145deg, #ffffff, #fff9e6);
-            border-radius: 12px;
-            border: 2px solid #ffd166;
+            border-radius: 8px;
+            border: 1.5px solid #ffd166;
+            flex: 1;
         }
         
         .keyword-label {
-            font-size: clamp(0.8rem, 2vw, 1rem);
+            font-size: 0.65rem;
             color: #ff8a00;
             font-weight: bold;
             text-align: center;
+            line-height: 0.9;
         }
         
         .keyword-slot {
-            width: clamp(55px, 8vw, 70px);
-            height: clamp(55px, 8vw, 70px);
-            border-radius: 15px;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
             background: linear-gradient(145deg, #ffd166, #ffc145);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: clamp(1.8rem, 3vw, 2.2rem);
+            font-size: 1.3rem;
             font-weight: bold;
             color: #333;
             cursor: grab;
-            box-shadow: 0 6px 15px rgba(255, 209, 102, 0.4),
-                        0 0 0 3px white;
+            box-shadow: 0 3px 8px rgba(255, 209, 102, 0.4),
+                        0 0 0 2px white;
             user-select: none;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
@@ -373,12 +396,12 @@
         .keyword-slot::before {
             content: '';
             position: absolute;
-            top: -3px;
-            left: -3px;
-            right: -3px;
-            bottom: -3px;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
             background: linear-gradient(45deg, #ff6b6b, #ffd166, #06d6a0, #4a90e2);
-            border-radius: 18px;
+            border-radius: 10px;
             z-index: -1;
             opacity: 0;
             transition: opacity 0.3s;
@@ -390,9 +413,9 @@
         }
         
         .keyword-slot:hover {
-            transform: translateY(-4px) rotate(3deg);
-            box-shadow: 0 10px 20px rgba(255, 209, 102, 0.6),
-                        0 0 0 3px white;
+            transform: translateY(-2px) rotate(2deg);
+            box-shadow: 0 5px 10px rgba(255, 209, 102, 0.6),
+                        0 0 0 2px white;
         }
         
         .keyword-slot:active {
@@ -402,7 +425,7 @@
         
         .keyword-slot.dragging {
             opacity: 0.9;
-            box-shadow: 0 15px 30px rgba(255, 209, 102, 0.7);
+            box-shadow: 0 8px 15px rgba(255, 209, 102, 0.7);
             z-index: 10000;
         }
         
@@ -410,24 +433,26 @@
             opacity: 0.3;
             cursor: default;
             transform: none;
-            box-shadow: 0 4px 8px rgba(255, 209, 102, 0.2);
+            box-shadow: 0 2px 4px rgba(255, 209, 102, 0.2);
         }
         
         .keyword-slot.used::before {
             opacity: 0;
         }
         
-        /* Phần feedback và điều khiển */
+        /* Phần feedback và điều khiển - cực gọn */
         .feedback {
             text-align: center;
-            margin: 20px 0;
-            min-height: 45px;
-            font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+            margin: 5px 0;
+            min-height: 30px;
+            font-size: 0.85rem;
             font-weight: bold;
-            padding: 12px;
-            border-radius: 12px;
+            padding: 6px;
+            border-radius: 8px;
             transition: all 0.3s;
-            border: 2px solid transparent;
+            border: 1.5px solid transparent;
+            flex-shrink: 0;
+            line-height: 1.1;
         }
         
         .correct {
@@ -439,7 +464,7 @@
         
         @keyframes correctPulse {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.02); }
+            50% { transform: scale(1.01); }
         }
         
         .incorrect {
@@ -451,23 +476,25 @@
         .controls {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
+            gap: 8px;
+            margin-top: 5px;
             flex-wrap: wrap;
+            flex-shrink: 0;
         }
         
         button {
-            padding: 12px 25px;
-            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            padding: 8px 15px;
+            font-size: 0.85rem;
             border: none;
-            border-radius: 40px;
+            border-radius: 25px;
             cursor: pointer;
             font-weight: bold;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
-            min-width: 120px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            min-width: 90px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            flex-shrink: 0;
         }
         
         button::after {
@@ -492,8 +519,8 @@
         }
         
         #check-btn:hover {
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 12px 25px rgba(74, 144, 226, 0.5);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 12px rgba(74, 144, 226, 0.5);
         }
         
         #reset-btn {
@@ -502,206 +529,168 @@
         }
         
         #reset-btn:hover {
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 12px 25px rgba(255, 154, 118, 0.5);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 6px 12px rgba(255, 154, 118, 0.5);
         }
         
         .timer {
             text-align: center;
-            margin-top: 15px;
-            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            margin-top: 5px;
+            font-size: 0.85rem;
             color: #666;
             font-weight: bold;
             background: linear-gradient(145deg, #ffffff, #f0f9ff);
-            padding: 12px;
-            border-radius: 12px;
-            border: 2px solid #ffd166;
+            padding: 6px;
+            border-radius: 8px;
+            border: 1.5px solid #ffd166;
+            flex-shrink: 0;
+            line-height: 1.1;
         }
         
         .timer span {
             color: #ff6b6b;
-            font-size: clamp(1.2rem, 3vw, 1.5rem);
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-        }
-        
-        .instructions {
-            background: linear-gradient(145deg, #e8f4ff, #d4eaff);
-            padding: 15px;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            font-size: clamp(1rem, 2.5vw, 1.1rem);
-            color: #4a90e2;
-            text-align: center;
-            border: 3px solid #4a90e2;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .instructions::before {
-            content: '💡';
-            position: absolute;
-            top: 8px;
-            left: 10px;
-            font-size: 1.2rem;
+            font-size: 0.95rem;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
         }
         
         .audio-controls {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-top: 15px;
+            gap: 6px;
+            margin-top: 5px;
+            flex-shrink: 0;
         }
         
         .audio-btn {
-            padding: 10px 20px;
-            font-size: clamp(0.8rem, 2vw, 1rem);
+            padding: 5px 12px;
+            font-size: 0.75rem;
             background: linear-gradient(145deg, #9d4edd, #8a2be2);
             color: white;
-            border-radius: 25px;
+            border-radius: 20px;
             border: none;
             cursor: pointer;
-            box-shadow: 0 6px 15px rgba(157, 78, 221, 0.3);
+            box-shadow: 0 3px 6px rgba(157, 78, 221, 0.3);
             transition: all 0.3s;
+            flex-shrink: 0;
         }
         
         .audio-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(157, 78, 221, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgba(157, 78, 221, 0.4);
         }
         
         /* Thêm hiệu ứng cho chữ cái khi kéo */
         .drag-ghost {
             position: fixed;
-            width: clamp(55px, 8vw, 70px);
-            height: clamp(55px, 8vw, 70px);
-            border-radius: 15px;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
             background: linear-gradient(145deg, #ffd166, #ffc145);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: clamp(1.8rem, 3vw, 2.2rem);
+            font-size: 1.3rem;
             font-weight: bold;
             color: #333;
             pointer-events: none;
             z-index: 10000;
-            box-shadow: 0 15px 30px rgba(255, 209, 102, 0.7);
+            box-shadow: 0 8px 15px rgba(255, 209, 102, 0.7);
             transform: translate(-50%, -50%);
             opacity: 0.95;
             transition: transform 0.1s;
         }
         
-        /* Responsive cho mobile và tablet */
-        @media (max-width: 768px) {
-            body {
-                padding: 8px;
-                justify-content: flex-start;
-            }
-            
-            .container {
-                padding: 15px 10px;
-                border-width: 4px;
-            }
-            
+        /* ========== RESPONSIVE ĐƠN GIẢN ========== */
+        
+        /* Điện thoại dọc - chuyển sang 1 cột */
+        @media (max-width: 600px) and (orientation: portrait) {
             .game-area {
                 flex-direction: column;
-                gap: 20px;
+                gap: 6px;
             }
             
             .questions-section, .keywords-section {
                 width: 100%;
+                max-width: 100%;
             }
             
             .keywords-section {
-                min-width: auto;
-                padding: 12px;
-            }
-            
-            .question-item {
-                padding: 10px;
-                gap: 10px;
-                min-height: auto;
-            }
-            
-            .question-image {
-                margin-right: 8px;
-            }
-            
-            .image-container {
-                width: 70px;
-                height: 70px;
-            }
-            
-            .question-text {
-                padding: 0 8px;
-            }
-            
-            .question {
-                font-size: 1.6rem;
+                padding: 6px;
+                max-width: 100%;
             }
             
             .keywords-grid {
                 flex-direction: row;
-                justify-content: center;
-                gap: 15px;
+                gap: 8px;
             }
             
             .keyword-item {
                 flex: 1;
-                max-width: 120px;
+                min-width: 0;
+            }
+            
+            h1 {
+                font-size: 1.2rem;
+            }
+            
+            .title-icon {
+                font-size: 1.1rem;
+            }
+            
+            .subtitle {
+                font-size: 0.8rem;
             }
         }
         
-        @media (max-width: 480px) {
-            .question-item {
-                flex-direction: column;
-                text-align: center;
-                gap: 12px;
-            }
-            
-            .question-image {
-                margin-right: 0;
-                margin-bottom: 8px;
-            }
-            
-            .question-text {
-                padding: 0;
-            }
-            
-            .answer-slot-container {
-                margin-left: 0;
-                margin-top: 8px;
-            }
-            
-            .keywords-grid {
-                flex-direction: column;
-            }
-            
-            .keyword-item {
-                max-width: none;
-            }
-            
-            .controls {
-                gap: 10px;
-            }
-            
-            button {
-                padding: 10px 20px;
-                min-width: 100px;
-            }
-        }
-        
-        /* Landscape mode */
-        @media (max-height: 500px) and (orientation: landscape) {
-            body {
-                padding: 5px;
-            }
-            
+        /* Điện thoại ngang - giữ bố cục ngang nhưng nhỏ hơn */
+        @media (max-width: 850px) and (orientation: landscape) {
             .container {
-                padding: 10px;
+                padding: 6px;
             }
             
             .question-item {
-                min-height: 80px;
+                min-height: 50px;
+                padding: 4px;
+            }
+            
+            .image-container {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .question {
+                font-size: 1rem;
+            }
+            
+            .answer-slot, .keyword-slot {
+                width: 35px;
+                height: 35px;
+                font-size: 1.1rem;
+            }
+            
+            .drag-ghost {
+                width: 35px;
+                height: 35px;
+                font-size: 1.1rem;
+            }
+            
+            .keywords-section {
+                max-width: 100px;
+            }
+            
+            h1 {
+                font-size: 1.1rem;
+            }
+        }
+        
+        /* iPad - bố cục ngang với kích thước vừa */
+        @media (min-width: 768px) {
+            .container {
+                padding: 12px;
+            }
+            
+            .question-item {
+                min-height: 70px;
                 padding: 8px;
             }
             
@@ -714,41 +703,66 @@
                 font-size: 1.4rem;
             }
             
-            .keyword-slot, .answer-slot {
-                width: 50px;
-                height: 50px;
+            .answer-slot, .keyword-slot {
+                width: 45px;
+                height: 45px;
+                font-size: 1.5rem;
+            }
+            
+            .drag-ghost {
+                width: 45px;
+                height: 45px;
+                font-size: 1.5rem;
+            }
+            
+            .keywords-section {
+                max-width: 140px;
+                padding: 10px;
+            }
+            
+            h1 {
                 font-size: 1.6rem;
             }
             
-            .keywords-grid {
-                flex-direction: row;
-                gap: 10px;
+            .title-icon {
+                font-size: 1.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
             }
         }
         
-        /* Very small screens */
-        @media (max-width: 320px) {
+        /* Màn hình rất nhỏ */
+        @media (max-height: 500px) {
             .question-item {
-                padding: 8px;
+                min-height: 45px;
             }
             
             .image-container {
-                width: 60px;
-                height: 60px;
+                width: 35px;
+                height: 35px;
             }
             
             .question {
-                font-size: 1.3rem;
+                font-size: 0.9rem;
             }
             
-            .keyword-slot, .answer-slot {
-                width: 50px;
-                height: 50px;
-                font-size: 1.6rem;
+            .answer-slot, .keyword-slot {
+                width: 30px;
+                height: 30px;
+                font-size: 1rem;
             }
             
-            .keywords-title {
-                font-size: 1.1rem;
+            .drag-ghost {
+                width: 30px;
+                height: 30px;
+                font-size: 1rem;
+            }
+            
+            .keywords-section {
+                max-width: 90px;
+                padding: 5px;
             }
         }
     </style>
@@ -756,16 +770,14 @@
 <body>
     <!-- Background -->
     <div class="background-image" id="background-image"></div>
-    <div class="decoration top-left"></div>
-    <div class="decoration bottom-right"></div>
-    
-    <div class="header">
-        <span class="title-icon">🧩🎨🐥</span>
-        <h1>Trò chơi Nối Hình Cho Bé</h1>
-        <p class="subtitle">Hãy kéo chữ cái đúng vào mỗi hình!</p>
-    </div>
     
     <div class="container">
+        <div class="header">
+            <span class="title-icon">🧩🎨🐥</span>
+            <h1>Trò chơi Nối Hình Cho Bé</h1>
+            <p class="subtitle">Hãy kéo chữ cái đúng vào mỗi hình!</p>
+        </div>
+        
         <div class="instructions">Kéo các chữ cái bên phải vào ô trống phù hợp với mỗi hình bên trái</div>
         
         <div class="game-area">
@@ -779,14 +791,16 @@
                                  alt="Con gà" 
                                  loading="lazy">
                         </div>
+                        <div class="image-label">Con gà</div>
                     </div>
                     
                     <div class="question-text">
                         <div class="question">...on gà</div>
-                        <div class="question-hint">Điền chữ cái còn thiếu</div>
+                        <div class="question-hint">Điền chữ cái</div>
                     </div>
                     
                     <div class="answer-slot-container">
+                        <div class="answer-label">Ô trống</div>
                         <div class="answer-slot" id="answer-1"></div>
                     </div>
                 </div>
@@ -799,14 +813,16 @@
                                  alt="In màu" 
                                  loading="lazy">
                         </div>
+                        <div class="image-label">In màu</div>
                     </div>
                     
                     <div class="question-text">
                         <div class="question">...n màu</div>
-                        <div class="question-hint">Tìm chữ cái còn thiếu</div>
+                        <div class="question-hint">Điền chữ cái</div>
                     </div>
                     
                     <div class="answer-slot-container">
+                        <div class="answer-label">Ô trống</div>
                         <div class="answer-slot" id="answer-2"></div>
                     </div>
                 </div>
@@ -819,14 +835,16 @@
                                  alt="Tàu hỏa" 
                                  loading="lazy">
                         </div>
+                        <div class="image-label">Tàu hỏa</div>
                     </div>
                     
                     <div class="question-text">
                         <div class="question">...àu hỏa</div>
-                        <div class="question-hint">Tìm chữ cái còn thiếu</div>
+                        <div class="question-hint">Điền chữ cái</div>
                     </div>
                     
                     <div class="answer-slot-container">
+                        <div class="answer-label">Ô trống</div>
                         <div class="answer-slot" id="answer-3"></div>
                     </div>
                 </div>
@@ -834,20 +852,23 @@
             
             <!-- Phần keywords bên phải - THỨ TỰ: T > C > I -->
             <div class="keywords-section">
-                <div class="keywords-title">Chữ cái gợi ý</div>
+                <div class="keywords-title">Chữ cái</div>
                 <div class="keywords-grid">
                     <!-- Keyword 1: T (Tàu hỏa) -->
                     <div class="keyword-item">
+                        <div class="keyword-label">Kéo vào</div>
                         <div class="keyword-slot" id="keyword-3" data-letter="t">T</div>
                     </div>
                     
                     <!-- Keyword 2: C (Con gà) -->
                     <div class="keyword-item">
+                        <div class="keyword-label">Kéo vào</div>
                         <div class="keyword-slot" id="keyword-1" data-letter="c">C</div>
                     </div>
                     
                     <!-- Keyword 3: I (In màu) -->
                     <div class="keyword-item">
+                        <div class="keyword-label">Kéo vào</div>
                         <div class="keyword-slot" id="keyword-2" data-letter="i">I</div>
                     </div>
                 </div>
@@ -1186,11 +1207,11 @@
             
             // Hiển thị phản hồi
             if (totalCount === 0) {
-                feedbackElement.innerHTML = `Hãy kéo chữ cái vào các ô trống trước khi kiểm tra! 👆`;
+                feedbackElement.innerHTML = `Hãy kéo chữ cái vào các ô trống! 👆`;
                 feedbackElement.className = 'feedback';
                 playSound('incorrect');
             } else if (correctCount === totalCount && totalCount === questionItems.length) {
-                feedbackElement.innerHTML = `🎉 <strong>Tuyệt vời! Tất cả đều đúng!</strong> 🎉<br><small>(Thời gian: ${timer.toFixed(1)}s)</small>`;
+                feedbackElement.innerHTML = `🎉 <strong>Tuyệt vời! Đúng hết!</strong> 🎉<br><small>(${timer.toFixed(1)}s)</small>`;
                 feedbackElement.className = 'feedback correct';
                 gameCompleted = true;
                 playSound('correct');
@@ -1198,7 +1219,7 @@
                 // Hiệu ứng pháo hoa
                 createConfetti();
             } else {
-                feedbackElement.innerHTML = `Có <strong>${correctCount}/${totalCount}</strong> đáp án đúng.<br>Bé thử lại nhé! 💪`;
+                feedbackElement.innerHTML = `Đúng <strong>${correctCount}/${totalCount}</strong>.<br>Thử lại nhé! 💪`;
                 feedbackElement.className = 'feedback incorrect';
                 playSound('incorrect');
             }
@@ -1212,11 +1233,11 @@
         function createConfetti() {
             const colors = ['#ff6b6b', '#4a90e2', '#06d6a0', '#ffd166', '#9d4edd'];
             
-            for (let i = 0; i < 30; i++) {
+            for (let i = 0; i < 20; i++) {
                 const confetti = document.createElement('div');
                 confetti.style.position = 'fixed';
-                confetti.style.width = '8px';
-                confetti.style.height = '8px';
+                confetti.style.width = '6px';
+                confetti.style.height = '6px';
                 confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
                 confetti.style.borderRadius = '50%';
                 confetti.style.left = Math.random() * 100 + 'vw';
@@ -1231,7 +1252,7 @@
                     { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
                     { transform: `translateY(${window.innerHeight + 100}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
                 ], {
-                    duration: 1500 + Math.random() * 1500,
+                    duration: 1000 + Math.random() * 1000,
                     easing: 'cubic-bezier(0.215, 0.610, 0.355, 1)'
                 });
                 
@@ -1257,9 +1278,9 @@
                     oscillator.frequency.setValueAtTime(659.25, audioContext.currentTime + 0.1); // E5
                     oscillator.frequency.setValueAtTime(783.99, audioContext.currentTime + 0.2); // G5
                     oscillator.frequency.setValueAtTime(1046.50, audioContext.currentTime + 0.3); // C6
-                    gainNode.gain.setValueAtTime(0.15, audioContext.currentTime);
+                    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
                     oscillator.start();
-                    oscillator.stop(audioContext.currentTime + 0.5);
+                    oscillator.stop(audioContext.currentTime + 0.4);
                     break;
                     
                 case 'incorrect':
@@ -1267,18 +1288,18 @@
                     oscillator.frequency.setValueAtTime(392.00, audioContext.currentTime); // G4
                     oscillator.frequency.setValueAtTime(349.23, audioContext.currentTime + 0.1); // F4
                     oscillator.frequency.setValueAtTime(392.00, audioContext.currentTime + 0.2); // G4
-                    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                    gainNode.gain.setValueAtTime(0.08, audioContext.currentTime);
                     oscillator.start();
-                    oscillator.stop(audioContext.currentTime + 0.4);
+                    oscillator.stop(audioContext.currentTime + 0.3);
                     break;
                     
                 case 'place':
                     // Âm thanh khi đặt chữ cái
                     oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime); // C5
-                    gainNode.gain.setValueAtTime(0.08, audioContext.currentTime);
-                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+                    gainNode.gain.setValueAtTime(0.06, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
                     oscillator.start();
-                    oscillator.stop(audioContext.currentTime + 0.3);
+                    oscillator.stop(audioContext.currentTime + 0.2);
                     break;
             }
         }
@@ -1363,7 +1384,16 @@
                 e.preventDefault();
             }
         });
+        
+        // Fix height cho mobile browsers
+        function setFullHeight() {
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        }
+        
+        window.addEventListener('resize', setFullHeight);
+        window.addEventListener('orientationchange', setFullHeight);
+        setFullHeight();
     </script>
 </body>
 </html>
-
