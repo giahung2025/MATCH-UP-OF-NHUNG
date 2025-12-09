@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Trò chơi Nối Hình Cho Bé</title>
+    <!-- Favicon cho GitHub Pages -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧩</text></svg>">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Comic Sans MS', 'Chalkboard SE', 'Arial Rounded MT Bold', cursive;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 15px;
+            color: #333;
+            position: relative;
+            overflow-x: hidden;
+            touch-action: pan-y;
+        }
+        
+        /* Background với hình ảnh vui nhộn */
+        .background-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://img.freepik.com/free-vector/cute-animals-seamless-pattern_42750-613.jpg');
+            background-size: 300px;
+            background-position: center;
+            opacity: 0.15;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        /* Thêm hình trang trí ở các góc */
+        .decoration {
+            position: fixed;
+            width: 120px;
+            height: 120px;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.2;
+        }
+        
+        .decoration.top-left {
+            top: 10px;
+            left: 10px;
+            background-image: url('https://cdn-icons-png.flaticon.com/512/4323/4323003.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        
+        .decoration.bottom-right {
+            bottom: 10px;
+            right: 10px;
+            background-image: url('https://cdn-icons-png.flaticon.com/512/4323/4323018.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            transform: rotate(180deg);
+        }
+        
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background: linear-gradient(145deg, #ffffff, #f0f9ff);
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(255, 107, 107, 0.2),
+                        0 5px 15px rgba(74, 144, 226, 0.1),
+                        inset 0 0 0 8px #ffd166;
+            padding: 25px 20px;
+            margin-top: 10px;
+            z-index: 1;
+            position: relative;
+            border: 8px solid white;
+        }
+        
+        /* Header đẹp mắt */
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+            position: relative;
+            padding: 0 10px;
+        }
+        
+        h1 {
+            color: #ff6b6b;
+            font-size: 2.8rem;
+            margin-bottom: 8px;
+            text-shadow: 3px 3px 0px rgba(255, 107, 107, 0.2),
+                         5px 5px 0px rgba(255, 209, 102, 0.2);
+            letter-spacing: 1px;
+            background: linear-gradient(45deg, #ff6b6b, #ff8a00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .title-icon {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 10px;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .subtitle {
+            color: #4a90e2;
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #4a90e2, #06d6a0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .game-area {
+            display: flex;
+            flex-direction: row;
+            gap: 40px;
+            margin-bottom: 30px;
+            align-items: flex-start;
+        }
+        
+        /* Phần câu hỏi bên trái */
+        .questions-section {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        /* Phần keywords bên phải */
+        .keywords-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            background: linear-gradient(145deg, #fff9e6, #fff0cc);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(255, 209, 102, 0.3),
+                        inset 0 0 0 4px #ffd166;
+            border: 4px solid white;
+            min-width: 280px;
+        }
+        
+        .keywords-title {
+            text-align: center;
+            font-size: 1.6rem;
+            color: #ff8a00;
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            background: linear-gradient(45deg, #ff8a00, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Mỗi câu hỏi */
+        .question-item {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(145deg, #ffffff, #e8f4ff);
+            border: 4px solid #a0d0ff;
+            border-radius: 20px;
+            padding: 20px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            box-shadow: 0 8px 20px rgba(160, 208, 255, 0.3);
+            min-height: 160px;
+        }
+        
+        .question-item.drag-over {
+            background: linear-gradient(145deg, #e8f4ff, #d4eaff);
+            border-color: #4a90e2;
+            box-shadow: 0 12px 25px rgba(74, 144, 226, 0.4);
+            transform: translateY(-3px);
+        }
+        
+        .question-item.correct {
+            border-color: #06d6a0;
+            background: linear-gradient(145deg, #c1ffd7, #a8f5cb);
+        }
+        
+        .question-item.incorrect {
+            border-color: #ef476f;
+            background: linear-gradient(145deg, #ffc9d5, #ffb5c8);
+        }
+        
+        /* Phần hình ảnh trong câu hỏi */
+        .question-image {
+            flex: 0 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-right: 25px;
+        }
+        
+        .image-container {
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            border: 5px solid white;
+            position: relative;
+        }
+        
+        .image-container::after {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, #ff6b6b, #ffd166, #06d6a0, #4a90e2);
+            border-radius: 17px;
+            z-index: -1;
+        }
+        
+        .image-container img {
+            width: 90%;
+            height: 90%;
+            object-fit: contain;
+            transition: transform 0.3s;
+        }
+        
+        .image-label {
+            font-size: 1.2rem;
+            color: #4a90e2;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        /* Phần từ gợi ý trong câu hỏi */
+        .question-text {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 20px;
+        }
+        
+        .question {
+            font-size: 2.5rem;
+            color: #333;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+        }
+        
+        .question-hint {
+            font-size: 1.2rem;
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+        
+        /* Ô trống trong câu hỏi */
+        .answer-slot-container {
+            flex: 0 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-left: 15px;
+        }
+        
+        .answer-label {
+            font-size: 1.2rem;
+            color: #4a90e2;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .answer-slot {
+            width: 85px;
+            height: 85px;
+            border-radius: 20px;
+            background: linear-gradient(145deg, #e8f4ff, #d4eaff);
+            border: 3px solid #4a90e2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.8rem;
+            font-weight: bold;
+            color: #4a90e2;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: inset 0 0 10px rgba(74, 144, 226, 0.2);
+        }
+        
+        .answer-slot.filled {
+            background: linear-gradient(145deg, #c8e6ff, #a8d4ff);
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(74, 144, 226, 0.4);
+        }
+        
+        /* Các keyword bên phải */
+        .keywords-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .keyword-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 15px;
+            background: linear-gradient(145deg, #ffffff, #fff9e6);
+            border-radius: 15px;
+            border: 3px solid #ffd166;
+        }
+        
+        .keyword-label {
+            font-size: 1.2rem;
+            color: #ff8a00;
+            font-weight: bold;
+            text-align: center;
+        }
+        
+        .keyword-slot {
+            width: 85px;
+            height: 85px;
+            border-radius: 20px;
+            background: linear-gradient(145deg, #ffd166, #ffc145);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.8rem;
+            font-weight: bold;
+            color: #333;
+            cursor: grab;
+            box-shadow: 0 10px 20px rgba(255, 209, 102, 0.4),
+                        0 0 0 4px white;
+            user-select: none;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            touch-action: none;
+            z-index: 1000;
+        }
+        
+        .keyword-slot::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            background: linear-gradient(45deg, #ff6b6b, #ffd166, #06d6a0, #4a90e2);
+            border-radius: 23px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .keyword-slot:hover::before,
+        .keyword-slot.dragging::before {
+            opacity: 1;
+        }
+        
+        .keyword-slot:hover {
+            transform: translateY(-5px) rotate(3deg);
+            box-shadow: 0 15px 30px rgba(255, 209, 102, 0.6),
+                        0 0 0 4px white;
+        }
+        
+        .keyword-slot:active {
+            cursor: grabbing;
+            transform: scale(0.95);
+        }
+        
+        .keyword-slot.dragging {
+            opacity: 0.9;
+            box-shadow: 0 20px 40px rgba(255, 209, 102, 0.7);
+            z-index: 10000;
+        }
+        
+        .keyword-slot.used {
+            opacity: 0.3;
+            cursor: default;
+            transform: none;
+            box-shadow: 0 5px 10px rgba(255, 209, 102, 0.2);
+        }
+        
+        .keyword-slot.used::before {
+            opacity: 0;
+        }
+        
+        /* Phần feedback và điều khiển */
+        .feedback {
+            text-align: center;
+            margin: 25px 0;
+            min-height: 50px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 15px;
+            border-radius: 15px;
+            transition: all 0.3s;
+            border: 3px solid transparent;
+        }
+        
+        .correct {
+            color: #06a76a;
+            background: linear-gradient(145deg, #c1ffd7, #a8f5cb);
+            border-color: #06d6a0;
+            animation: correctPulse 2s infinite;
+        }
+        
+        @keyframes correctPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+        
+        .incorrect {
+            color: #ef476f;
+            background: linear-gradient(145deg, #ffc9d5, #ffb5c8);
+            border-color: #ef476f;
+        }
+        
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 25px;
+        }
+        
+        button {
+            padding: 18px 35px;
+            font-size: 1.4rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            min-width: 160px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+        }
+        
+        button:hover::after {
+            left: 50%;
+        }
+        
+        #check-btn {
+            background: linear-gradient(145deg, #4a90e2, #3a7bc8);
+            color: white;
+        }
+        
+        #check-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(74, 144, 226, 0.5);
+        }
+        
+        #reset-btn {
+            background: linear-gradient(145deg, #ff9a76, #ff8a66);
+            color: white;
+        }
+        
+        #reset-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(255, 154, 118, 0.5);
+        }
+        
+        .timer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.5rem;
+            color: #666;
+            font-weight: bold;
+            background: linear-gradient(145deg, #ffffff, #f0f9ff);
+            padding: 15px;
+            border-radius: 15px;
+            border: 3px solid #ffd166;
+        }
+        
+        .timer span {
+            color: #ff6b6b;
+            font-size: 1.8rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        .instructions {
+            background: linear-gradient(145deg, #e8f4ff, #d4eaff);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+            color: #4a90e2;
+            text-align: center;
+            border: 4px solid #4a90e2;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .instructions::before {
+            content: '💡';
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            font-size: 1.8rem;
+        }
+        
+        .audio-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .audio-btn {
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            background: linear-gradient(145deg, #9d4edd, #8a2be2);
+            color: white;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(157, 78, 221, 0.3);
+            transition: all 0.3s;
+        }
+        
+        .audio-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(157, 78, 221, 0.4);
+        }
+        
+        /* Thêm hiệu ứng cho chữ cái khi kéo */
+        .drag-ghost {
+            position: fixed;
+            width: 85px;
+            height: 85px;
+            border-radius: 20px;
+            background: linear-gradient(145deg, #ffd166, #ffc145);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.8rem;
+            font-weight: bold;
+            color: #333;
+            pointer-events: none;
+            z-index: 10000;
+            box-shadow: 0 20px 40px rgba(255, 209, 102, 0.7);
+            transform: translate(-50%, -50%);
+            opacity: 0.95;
+            transition: transform 0.1s;
+        }
+        
+        /* Responsive cho mobile và tablet */
+        @media (max-width: 992px) {
+            .game-area {
+                flex-direction: column;
+                gap: 30px;
+            }
+            
+            .questions-section, .keywords-section {
+                width: 100%;
+            }
+            
+            .keywords-section {
+                min-width: auto;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                padding: 20px 15px;
+                border-width: 6px;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .question-item {
+                flex-direction: column;
+                padding: 15px;
+                gap: 20px;
+                min-height: auto;
+            }
+            
+            .question-image {
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+            
+            .question-text {
+                padding: 0;
+                align-items: center;
+                text-align: center;
+            }
+            
+            .question {
+                font-size: 2rem;
+                margin-bottom: 5px;
+            }
+            
+            .question-hint {
+                font-size: 1.1rem;
+            }
+            
+            .answer-slot-container {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+            
+            .image-container {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .keyword-slot, .answer-slot {
+                width: 70px;
+                height: 70px;
+                font-size: 2.4rem;
+            }
+            
+            .drag-ghost {
+                width: 70px;
+                height: 70px;
+                font-size: 2.4rem;
+            }
+            
+            button {
+                padding: 15px 25px;
+                font-size: 1.2rem;
+                min-width: 140px;
+            }
+            
+            .timer {
+                font-size: 1.3rem;
+                padding: 12px;
+            }
+            
+            .timer span {
+                font-size: 1.6rem;
+            }
+            
+            .decoration {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .image-label, .answer-label, .keyword-label {
+                font-size: 1.1rem;
+            }
+            
+            .keywords-section {
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .title-icon {
+                font-size: 2rem;
+            }
+            
+            .image-container {
+                width: 90px;
+                height: 90px;
+            }
+            
+            .question {
+                font-size: 1.8rem;
+            }
+            
+            .keyword-slot, .answer-slot {
+                width: 65px;
+                height: 65px;
+                font-size: 2.2rem;
+            }
+            
+            .drag-ghost {
+                width: 65px;
+                height: 65px;
+                font-size: 2.2rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            button {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .keywords-title {
+                font-size: 1.4rem;
+            }
+        }
+        
+        /* Landscape mode */
+        @media (max-height: 600px) and (orientation: landscape) {
+            .container {
+                padding: 15px;
+            }
+            
+            .question-item {
+                flex-direction: row;
+                padding: 12px;
+                min-height: 120px;
+            }
+            
+            .image-container {
+                width: 80px;
+                height: 80px;
+            }
+            
+            .question {
+                font-size: 1.6rem;
+            }
+            
+            .keyword-slot, .answer-slot {
+                width: 60px;
+                height: 60px;
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background -->
+    <div class="background-image" id="background-image"></div>
+    <div class="decoration top-left"></div>
+    <div class="decoration bottom-right"></div>
+    
+    <div class="header">
+        <span class="title-icon">🧩🎨🐥</span>
+        <h1>Trò chơi Nối Hình Cho Bé</h1>
+        <p class="subtitle">Hãy kéo chữ cái đúng vào mỗi hình!</p>
+    </div>
+    
+    <div class="container">
+        <div class="instructions">Kéo các chữ cái bên phải vào ô trống phù hợp với mỗi hình bên trái</div>
+        
+        <div class="game-area">
+            <!-- Phần câu hỏi bên trái -->
+            <div class="questions-section">
+                <!-- Câu hỏi 1: Con gà -->
+                <div class="question-item" id="question-1" data-correct="c">
+                    <div class="question-image">
+                        <div class="image-container">
+                            <img src="https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/482881IHi/anh-mo-ta.png" 
+                                 alt="Con gà" 
+                                 loading="lazy">
+                        </div>
+                        <div class="image-label">Con gà</div>
+                    </div>
+                    
+                    <div class="question-text">
+                        <div class="question">...on gà</div>
+                        <div class="question-hint">Điền chữ cái còn thiếu</div>
+                    </div>
+                    
+                    <div class="answer-slot-container">
+                        <div class="answer-label">Ô trống</div>
+                        <div class="answer-slot" id="answer-1"></div>
+                    </div>
+                </div>
+                
+                <!-- Câu hỏi 2: In màu -->
+                <div class="question-item" id="question-2" data-correct="i">
+                    <div class="question-image">
+                        <div class="image-container">
+                            <img src="https://vcdn.tikicdn.com/ts/product/cf/03/71/247c65863eb01aa7d33de1e9afe015ed.jpg" 
+                                 alt="In màu" 
+                                 loading="lazy">
+                        </div>
+                        <div class="image-label">In màu</div>
+                    </div>
+                    
+                    <div class="question-text">
+                        <div class="question">...n màu</div>
+                        <div class="question-hint">Điền chữ cái còn thiếu</div>
+                    </div>
+                    
+                    <div class="answer-slot-container">
+                        <div class="answer-label">Ô trống</div>
+                        <div class="answer-slot" id="answer-2"></div>
+                    </div>
+                </div>
+                
+                <!-- Câu hỏi 3: Tàu hỏa -->
+                <div class="question-item" id="question-3" data-correct="t">
+                    <div class="question-image">
+                        <div class="image-container">
+                            <img src="https://images2.thanhnien.vn/zoom/686_429/528068263637045248/2023/10/12/anh-chup-man-hinh-2023-10-12-luc-104638-16970824094681144114053-0-0-1062-1699-crop-16970824531081807594221.png" 
+                                 alt="Tàu hỏa" 
+                                 loading="lazy">
+                        </div>
+                        <div class="image-label">Tàu hỏa</div>
+                    </div>
+                    
+                    <div class="question-text">
+                        <div class="question">...àu hỏa</div>
+                        <div class="question-hint">Điền chữ cái còn thiếu</div>
+                    </div>
+                    
+                    <div class="answer-slot-container">
+                        <div class="answer-label">Ô trống</div>
+                        <div class="answer-slot" id="answer-3"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Phần keywords bên phải -->
+            <div class="keywords-section">
+                <div class="keywords-title">Kéo & thả chữ vào ô đúng</div>
+                <div class="keywords-grid">
+                    <!-- Keyword 1 -->
+                    <div class="keyword-item">
+                        <div class="keyword-slot" id="keyword-1" data-letter="c">T</div>
+                    </div>
+                    
+                    <!-- Keyword 2 -->
+                    <div class="keyword-item">
+                        <div class="keyword-slot" id="keyword-2" data-letter="i">C</div>
+                    </div>
+                    
+                    <!-- Keyword 3 -->
+                    <div class="keyword-item">
+                        <div class="keyword-slot" id="keyword-3" data-letter="t">I</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="feedback" id="feedback"></div>
+        
+        <div class="controls">
+            <button id="check-btn">✅ Kiểm tra</button>
+            <button id="reset-btn">🔄 Làm lại</button>
+        </div>
+        
+        <div class="timer">
+            ⏱️ Thời gian: <span id="timer">0.0</span>s
+        </div>
+        
+        <!-- Audio controls -->
+        <div class="audio-controls">
+            <button class="audio-btn" id="mute-btn">🔇 Tắt nhạc</button>
+        </div>
+    </div>
+
+    <!-- Hiệu ứng kéo theo ngón tay -->
+    <div class="drag-ghost" id="drag-ghost" style="display: none;"></div>
+
+    <script>
+        // Khởi tạo các biến
+        let timer = 0;
+        let timerInterval = null;
+        let gameCompleted = false;
+        let isTimerRunning = true;
+        let isMuted = false;
+        let draggedItem = null;
+        let dragGhostVisible = false;
+        
+        // Các phần tử DOM
+        const checkBtn = document.getElementById('check-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const timerElement = document.getElementById('timer');
+        const feedbackElement = document.getElementById('feedback');
+        const muteBtn = document.getElementById('mute-btn');
+        const dragGhostElement = document.getElementById('drag-ghost');
+        
+        // Thêm sự kiện DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log("DOM đã sẵn sàng, khởi tạo trò chơi...");
+            initGame();
+        });
+        
+        // Khởi tạo trò chơi
+        function initGame() {
+            // Bắt đầu bộ đếm thời gian
+            startTimer();
+            
+            // Ẩn drag ghost
+            dragGhostElement.style.display = 'none';
+            
+            // Thêm sự kiện cho các keyword
+            const keywordSlots = document.querySelectorAll('.keyword-slot');
+            keywordSlots.forEach(keyword => {
+                // Thêm sự kiện kéo thả cho desktop
+                keyword.addEventListener('dragstart', handleDragStart);
+                keyword.addEventListener('dragend', handleDragEnd);
+                
+                // Thêm sự kiện touch cho mobile
+                keyword.addEventListener('touchstart', handleTouchStart, {passive: false});
+                keyword.addEventListener('touchmove', handleTouchMove, {passive: false});
+                keyword.addEventListener('touchend', handleTouchEnd);
+            });
+            
+            // Thêm sự kiện drag và drop cho các câu hỏi
+            const questionItems = document.querySelectorAll('.question-item');
+            questionItems.forEach(item => {
+                item.addEventListener('dragover', handleDragOver);
+                item.addEventListener('dragleave', handleDragLeave);
+                item.addEventListener('drop', handleDrop);
+                item.setAttribute('aria-dropeffect', 'move');
+            });
+        }
+        
+        // Bắt đầu bộ đếm thời gian
+        function startTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+            }
+            
+            timer = 0;
+            isTimerRunning = true;
+            
+            timerInterval = setInterval(() => {
+                if (isTimerRunning) {
+                    timer += 0.1;
+                    timerElement.textContent = timer.toFixed(1);
+                }
+            }, 100);
+        }
+        
+        // Dừng bộ đếm thời gian
+        function stopTimer() {
+            isTimerRunning = false;
+        }
+        
+        // ========== DRAG AND DROP FUNCTIONS ==========
+        
+        // Xử lý bắt đầu kéo (desktop)
+        function handleDragStart(e) {
+            if (gameCompleted) return false;
+            
+            draggedItem = e.target;
+            e.target.classList.add('dragging');
+            
+            e.dataTransfer.setData('text/plain', e.target.id);
+            e.dataTransfer.setData('text/letter', e.target.getAttribute('data-letter'));
+            
+            // Tạo ghost element
+            createDragGhost(e.target, e.clientX, e.clientY);
+            
+            return true;
+        }
+        
+        // Xử lý kết thúc kéo (desktop)
+        function handleDragEnd(e) {
+            if (!draggedItem) return;
+            
+            draggedItem.classList.remove('dragging');
+            hideDragGhost();
+            draggedItem = null;
+        }
+        
+        // Xử lý khi kéo qua vùng thả (desktop)
+        function handleDragOver(e) {
+            if (gameCompleted) return;
+            
+            e.preventDefault();
+            e.currentTarget.classList.add('drag-over');
+        }
+        
+        // Xử lý khi rời khỏi vùng thả (desktop)
+        function handleDragLeave(e) {
+            e.currentTarget.classList.remove('drag-over');
+        }
+        
+        // Xử lý khi thả (desktop) - LUÔN NHẬN CHỮ CÁI
+        function handleDrop(e) {
+            if (gameCompleted || !draggedItem) return;
+            
+            e.preventDefault();
+            e.currentTarget.classList.remove('drag-over');
+            
+            const questionItem = e.currentTarget;
+            const answerSlot = questionItem.querySelector('.answer-slot');
+            const letter = draggedItem.getAttribute('data-letter');
+            
+            // LUÔN NHẬN CHỮ CÁI (không kiểm tra đúng/sai ở đây)
+            placeLetterInSlot(draggedItem, answerSlot, letter);
+            
+            hideDragGhost();
+            draggedItem.classList.remove('dragging');
+            draggedItem = null;
+        }
+        
+        // ========== TOUCH FUNCTIONS ==========
+        
+        // Xử lý bắt đầu chạm
+        function handleTouchStart(e) {
+            if (gameCompleted) {
+                e.preventDefault();
+                return;
+            }
+            
+            const touch = e.touches[0];
+            draggedItem = e.target;
+            
+            draggedItem.classList.add('dragging');
+            
+            // Tạo ghost element
+            createDragGhost(draggedItem, touch.clientX, touch.clientY);
+            
+            e.preventDefault();
+        }
+        
+        // Xử lý di chuyển ngón tay
+        function handleTouchMove(e) {
+            if (!draggedItem || !dragGhostVisible) return;
+            
+            const touch = e.touches[0];
+            
+            // Cập nhật vị trí ghost element
+            updateDragGhostPosition(touch.clientX, touch.clientY);
+            
+            // Kiểm tra xem có đang kéo qua vùng thả không
+            const elementAtTouch = document.elementFromPoint(touch.clientX, touch.clientY);
+            let hoveredQuestionItem = null;
+            
+            if (elementAtTouch) {
+                hoveredQuestionItem = elementAtTouch.closest('.question-item');
+            }
+            
+            // Cập nhật trạng thái cho tất cả các câu hỏi
+            const questionItems = document.querySelectorAll('.question-item');
+            questionItems.forEach(item => {
+                if (item === hoveredQuestionItem) {
+                    item.classList.add('drag-over');
+                } else {
+                    item.classList.remove('drag-over');
+                }
+            });
+            
+            e.preventDefault();
+        }
+        
+        // Xử lý kết thúc chạm - LUÔN NHẬN CHỮ CÁI
+        function handleTouchEnd(e) {
+            if (!draggedItem) return;
+            
+            const touch = e.changedTouches[0];
+            const elementAtTouch = document.elementFromPoint(touch.clientX, touch.clientY);
+            let questionItem = null;
+            
+            if (elementAtTouch) {
+                questionItem = elementAtTouch.closest('.question-item');
+            }
+            
+            // Ẩn ghost và xóa lớp dragging
+            hideDragGhost();
+            draggedItem.classList.remove('dragging');
+            
+            // Xóa trạng thái drag-over từ tất cả các vùng
+            const questionItems = document.querySelectorAll('.question-item');
+            questionItems.forEach(item => {
+                item.classList.remove('drag-over');
+            });
+            
+            if (questionItem) {
+                const answerSlot = questionItem.querySelector('.answer-slot');
+                const letter = draggedItem.getAttribute('data-letter');
+                
+                // LUÔN NHẬN CHỮ CÁI (không kiểm tra đúng/sai ở đây)
+                placeLetterInSlot(draggedItem, answerSlot, letter);
+            }
+            
+            draggedItem = null;
+        }
+        
+        // ========== HELPER FUNCTIONS ==========
+        
+        // Tạo ghost element để kéo theo ngón tay
+        function createDragGhost(element, x, y) {
+            const letter = element.getAttribute('data-letter');
+            const color = 'linear-gradient(145deg, #ffd166, #ffc145)';
+            
+            dragGhostElement.textContent = letter;
+            dragGhostElement.style.background = color;
+            dragGhostElement.style.display = 'block';
+            dragGhostElement.style.left = x + 'px';
+            dragGhostElement.style.top = y + 'px';
+            dragGhostElement.style.transform = 'translate(-50%, -50%) scale(1)';
+            dragGhostElement.style.opacity = '0.95';
+            
+            dragGhostVisible = true;
+        }
+        
+        // Cập nhật vị trí ghost element
+        function updateDragGhostPosition(x, y) {
+            if (!dragGhostVisible) return;
+            
+            dragGhostElement.style.left = x + 'px';
+            dragGhostElement.style.top = y + 'px';
+        }
+        
+        // Ẩn ghost element
+        function hideDragGhost() {
+            dragGhostElement.style.display = 'none';
+            dragGhostVisible = false;
+        }
+        
+        // Đặt chữ cái vào ô trống (LUÔN NHẬN)
+        function placeLetterInSlot(dragItem, answerSlot, letter) {
+            // Nếu ô đã có chữ cái, trả chữ cái đó về (đánh dấu không dùng nữa)
+            if (answerSlot.textContent) {
+                const currentLetter = answerSlot.textContent;
+                // Tìm keyword cũ và đánh dấu không dùng
+                const oldKeyword = document.querySelector(`.keyword-slot.used[data-letter="${currentLetter}"]:not(.dragging)`);
+                if (oldKeyword) {
+                    oldKeyword.classList.remove('used');
+                }
+            }
+            
+            // Đặt chữ cái mới vào ô trống
+            answerSlot.textContent = letter;
+            answerSlot.classList.add('filled');
+            
+            // Đánh dấu keyword đã được sử dụng
+            dragItem.classList.add('used');
+            
+            // Cập nhật trạng thái ARIA
+            answerSlot.setAttribute('aria-label', `Đáp án: ${letter}`);
+            
+            // Phát âm thanh
+            playSound('place');
+        }
+        
+        // Kiểm tra câu trả lời khi nhấn nút Kiểm tra
+        function checkAnswers() {
+            // Dừng bộ đếm thời gian khi kiểm tra kết quả
+            stopTimer();
+            
+            let correctCount = 0;
+            let totalCount = 0;
+            
+            const questionItems = document.querySelectorAll('.question-item');
+            questionItems.forEach((item) => {
+                const correctAnswer = item.getAttribute('data-correct');
+                const answerSlot = item.querySelector('.answer-slot');
+                const userAnswer = answerSlot.textContent.toLowerCase();
+                
+                // Chỉ đếm nếu có đáp án
+                if (userAnswer) {
+                    totalCount++;
+                    
+                    if (userAnswer === correctAnswer) {
+                        item.classList.add('correct');
+                        item.classList.remove('incorrect');
+                        answerSlot.style.background = 'linear-gradient(145deg, #c1ffd7, #a8f5cb)';
+                        answerSlot.style.color = '#06a76a';
+                        correctCount++;
+                    } else {
+                        item.classList.add('incorrect');
+                        item.classList.remove('correct');
+                        answerSlot.style.background = 'linear-gradient(145deg, #ffc9d5, #ffb5c8)';
+                        answerSlot.style.color = '#ef476f';
+                    }
+                }
+            });
+            
+            // Hiển thị phản hồi
+            if (totalCount === 0) {
+                feedbackElement.innerHTML = `Hãy kéo chữ cái vào các ô trống trước khi kiểm tra! 👆`;
+                feedbackElement.className = 'feedback';
+                playSound('incorrect');
+            } else if (correctCount === totalCount && totalCount === questionItems.length) {
+                feedbackElement.innerHTML = `🎉 <strong>Tuyệt vời! Tất cả đều đúng!</strong> 🎉<br><small>(Thời gian: ${timer.toFixed(1)}s)</small>`;
+                feedbackElement.className = 'feedback correct';
+                gameCompleted = true;
+                playSound('correct');
+                
+                // Hiệu ứng pháo hoa
+                createConfetti();
+            } else {
+                feedbackElement.innerHTML = `Có <strong>${correctCount}/${totalCount}</strong> đáp án đúng.<br>Bé thử lại nhé! 💪`;
+                feedbackElement.className = 'feedback incorrect';
+                playSound('incorrect');
+            }
+            
+            // Cập nhật phản hồi ARIA
+            feedbackElement.setAttribute('role', 'alert');
+            feedbackElement.setAttribute('aria-live', 'polite');
+        }
+        
+        // Tạo hiệu ứng pháo hoa
+        function createConfetti() {
+            const colors = ['#ff6b6b', '#4a90e2', '#06d6a0', '#ffd166', '#9d4edd'];
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'fixed';
+                confetti.style.width = '10px';
+                confetti.style.height = '10px';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.borderRadius = '50%';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.top = '-10px';
+                confetti.style.zIndex = '9999';
+                confetti.style.pointerEvents = 'none';
+                
+                document.body.appendChild(confetti);
+                
+                // Animation
+                const animation = confetti.animate([
+                    { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                    { transform: `translateY(${window.innerHeight + 100}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+                ], {
+                    duration: 2000 + Math.random() * 2000,
+                    easing: 'cubic-bezier(0.215, 0.610, 0.355, 1)'
+                });
+                
+                animation.onfinish = () => confetti.remove();
+            }
+        }
+        
+        // Phát âm thanh
+        function playSound(type) {
+            if (isMuted) return;
+            
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            switch(type) {
+                case 'correct':
+                    // Chuỗi nốt nhạc vui vẻ
+                    oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime); // C5
+                    oscillator.frequency.setValueAtTime(659.25, audioContext.currentTime + 0.1); // E5
+                    oscillator.frequency.setValueAtTime(783.99, audioContext.currentTime + 0.2); // G5
+                    oscillator.frequency.setValueAtTime(1046.50, audioContext.currentTime + 0.3); // C6
+                    gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+                    oscillator.start();
+                    oscillator.stop(audioContext.currentTime + 0.5);
+                    break;
+                    
+                case 'incorrect':
+                    // Âm thanh động viên
+                    oscillator.frequency.setValueAtTime(392.00, audioContext.currentTime); // G4
+                    oscillator.frequency.setValueAtTime(349.23, audioContext.currentTime + 0.1); // F4
+                    oscillator.frequency.setValueAtTime(392.00, audioContext.currentTime + 0.2); // G4
+                    gainNode.gain.setValueAtTime(0.15, audioContext.currentTime);
+                    oscillator.start();
+                    oscillator.stop(audioContext.currentTime + 0.4);
+                    break;
+                    
+                case 'place':
+                    // Âm thanh khi đặt chữ cái
+                    oscillator.frequency.setValueAtTime(523.25, audioContext.currentTime); // C5
+                    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+                    oscillator.start();
+                    oscillator.stop(audioContext.currentTime + 0.3);
+                    break;
+            }
+        }
+        
+        // Đặt lại trò chơi
+        function resetGame() {
+            // Xóa nội dung các ô trống
+            const answerSlots = document.querySelectorAll('.answer-slot');
+            answerSlots.forEach(slot => {
+                slot.textContent = '';
+                slot.classList.remove('filled');
+                slot.style.background = '';
+                slot.style.color = '';
+                slot.removeAttribute('aria-label');
+            });
+            
+            // Xóa lớp từ các câu hỏi
+            const questionItems = document.querySelectorAll('.question-item');
+            questionItems.forEach(item => {
+                item.classList.remove('correct', 'incorrect');
+            });
+            
+            // Đặt lại các keyword
+            const keywordSlots = document.querySelectorAll('.keyword-slot');
+            keywordSlots.forEach(keyword => {
+                keyword.classList.remove('used', 'dragging');
+                keyword.style.transition = '';
+                keyword.style.transform = '';
+            });
+            
+            // Đặt lại phản hồi
+            feedbackElement.textContent = '';
+            feedbackElement.className = 'feedback';
+            feedbackElement.removeAttribute('role');
+            feedbackElement.removeAttribute('aria-live');
+            
+            // Đặt lại trạng thái trò chơi
+            gameCompleted = false;
+            
+            // Ẩn ghost nếu đang hiển thị
+            hideDragGhost();
+            
+            // Khởi tạo lại timer
+            startTimer();
+        }
+        
+        // Sự kiện cho các nút
+        checkBtn.addEventListener('click', checkAnswers);
+        resetBtn.addEventListener('click', resetGame);
+        
+        muteBtn.addEventListener('click', function() {
+            isMuted = !isMuted;
+            muteBtn.textContent = isMuted ? '🔈 Bật nhạc' : '🔇 Tắt nhạc';
+            muteBtn.setAttribute('aria-pressed', isMuted);
+        });
+        
+        // Thêm hỗ trợ keyboard
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                resetGame();
+            } else if (e.key === 'Enter' && document.activeElement === checkBtn) {
+                checkAnswers();
+            } else if (e.key === 'r' || e.key === 'R') {
+                resetBtn.focus();
+            } else if (e.key === 'c' || e.key === 'C') {
+                checkBtn.focus();
+            }
+        });
+        
+        // Thêm loading state cho hình ảnh
+        document.querySelectorAll('img').forEach(img => {
+            img.addEventListener('load', function() {
+                this.style.opacity = '1';
+            });
+            img.style.transition = 'opacity 0.3s';
+            img.style.opacity = '0';
+        });
+        
+        // Ngăn context menu trên mobile
+        document.addEventListener('contextmenu', function(e) {
+            if (e.target.classList.contains('keyword-slot')) {
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>
