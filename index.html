@@ -27,7 +27,7 @@
             justify-content: center;
             min-height: 100vh;
             min-height: -webkit-fill-available;
-            padding: 5px;
+            padding: 0;
             color: #333;
             position: fixed;
             top: 0;
@@ -46,7 +46,7 @@
             width: 100%;
             height: 100%;
             background-image: url('https://img.freepik.com/free-vector/cute-animals-seamless-pattern_42750-613.jpg');
-            background-size: 250px;
+            background-size: 200px;
             background-position: center;
             opacity: 0.1;
             z-index: -1;
@@ -59,11 +59,9 @@
             max-width: 100%;
             max-height: 100%;
             background: linear-gradient(145deg, #ffffff, #f0f9ff);
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.2),
-                        0 3px 10px rgba(74, 144, 226, 0.1),
-                        inset 0 0 0 4px #ffd166;
-            padding: 10px;
+            border-radius: 0;
+            box-shadow: 0 0 0 4px #ffd166;
+            padding: 2vh 2vw;
             z-index: 1;
             position: relative;
             border: 4px solid white;
@@ -72,19 +70,23 @@
             overflow: hidden;
         }
         
-        /* Header đẹp mắt - thu nhỏ lại */
+        /* Header đẹp mắt */
         .header {
             text-align: center;
-            margin-bottom: 5px;
+            margin-bottom: 1.5vh;
             position: relative;
-            padding: 0 5px;
+            padding: 0;
             flex-shrink: 0;
+            height: 12vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         
         h1 {
             color: #ff6b6b;
-            font-size: 1.4rem;
-            margin-bottom: 3px;
+            font-size: min(3vh, 4vw, 2rem);
+            margin-bottom: 0.5vh;
             text-shadow: 2px 2px 0px rgba(255, 107, 107, 0.2),
                          3px 3px 0px rgba(255, 209, 102, 0.2);
             letter-spacing: 0.5px;
@@ -96,9 +98,9 @@
         }
         
         .title-icon {
-            font-size: 1.3rem;
+            font-size: min(3vh, 3vw, 1.8rem);
             display: block;
-            margin-bottom: 3px;
+            margin-bottom: 0.5vh;
             animation: bounce 2s infinite;
         }
         
@@ -109,8 +111,8 @@
         
         .subtitle {
             color: #4a90e2;
-            font-size: 0.9rem;
-            margin-bottom: 3px;
+            font-size: min(2vh, 2.5vw, 1.2rem);
+            margin-bottom: 0.5vh;
             font-weight: bold;
             background: linear-gradient(45deg, #4a90e2, #06d6a0);
             -webkit-background-clip: text;
@@ -121,10 +123,10 @@
         
         .instructions {
             background: linear-gradient(145deg, #e8f4ff, #d4eaff);
-            padding: 6px 8px;
+            padding: 1vh 1.5vw;
             border-radius: 8px;
-            margin-bottom: 8px;
-            font-size: 0.8rem;
+            margin-bottom: 1.5vh;
+            font-size: min(1.8vh, 2vw, 1rem);
             color: #4a90e2;
             text-align: center;
             border: 2px solid #4a90e2;
@@ -132,25 +134,32 @@
             overflow: hidden;
             flex-shrink: 0;
             line-height: 1.1;
+            height: 6vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .instructions::before {
             content: '💡';
             position: absolute;
-            top: 5px;
-            left: 8px;
-            font-size: 0.9rem;
+            top: 50%;
+            left: 1vw;
+            transform: translateY(-50%);
+            font-size: min(2vh, 2vw, 1.2rem);
         }
         
         .game-area {
             display: flex;
             flex-direction: row;
-            gap: 8px;
-            margin-bottom: 8px;
+            gap: 2vw;
+            margin-bottom: 1.5vh;
             align-items: stretch;
             flex: 1;
             min-height: 0;
             overflow: hidden;
+            height: calc(100vh - 12vh - 6vh - 1.5vh - 1.5vh - 20vh);
+            max-height: 60vh;
         }
         
         /* Phần câu hỏi bên trái */
@@ -158,9 +167,10 @@
             flex: 3;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 1.5vh;
             min-width: 0;
             overflow: hidden;
+            justify-content: space-between;
         }
         
         /* Phần keywords bên phải */
@@ -168,22 +178,23 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 1.5vh;
             background: linear-gradient(145deg, #fff9e6, #fff0cc);
-            padding: 8px;
+            padding: 1.5vh 1.5vw;
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(255, 209, 102, 0.3),
                         inset 0 0 0 2px #ffd166;
             border: 2px solid white;
             min-width: 0;
-            max-width: 120px;
+            max-width: 25vw;
+            justify-content: center;
         }
         
         .keywords-title {
             text-align: center;
-            font-size: 0.9rem;
+            font-size: min(2.2vh, 2.5vw, 1.3rem);
             color: #ff8a00;
-            margin-bottom: 6px;
+            margin-bottom: 1.5vh;
             font-weight: bold;
             text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
             background: linear-gradient(45deg, #ff8a00, #ff6b6b);
@@ -193,19 +204,20 @@
             line-height: 1.1;
         }
         
-        /* Mỗi câu hỏi - rất gọn */
+        /* Mỗi câu hỏi */
         .question-item {
             display: flex;
             align-items: center;
             background: linear-gradient(145deg, #ffffff, #e8f4ff);
             border: 2px solid #a0d0ff;
             border-radius: 10px;
-            padding: 6px;
+            padding: 1vh 1vw;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             box-shadow: 0 3px 8px rgba(160, 208, 255, 0.3);
-            min-height: 60px;
+            height: calc((100% - 3vh) / 3);
             flex-shrink: 0;
+            min-height: 15vh;
         }
         
         .question-item.drag-over {
@@ -225,19 +237,19 @@
             background: linear-gradient(145deg, #ffc9d5, #ffb5c8);
         }
         
-        /* Phần hình ảnh trong câu hỏi - nhỏ gọn */
+        /* Phần hình ảnh trong câu hỏi */
         .question-image {
             flex: 0 0 auto;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 3px;
-            margin-right: 6px;
+            gap: 0.5vh;
+            margin-right: 1vw;
         }
         
         .image-container {
-            width: 50px;
-            height: 50px;
+            width: min(10vh, 10vw, 80px);
+            height: min(10vh, 10vw, 80px);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -262,18 +274,18 @@
         }
         
         .image-container img {
-            width: 80%;
-            height: 80%;
+            width: 85%;
+            height: 85%;
             object-fit: contain;
             transition: transform 0.3s;
         }
         
         .image-label {
-            font-size: 0.65rem;
+            font-size: min(1.5vh, 1.8vw, 0.9rem);
             color: #4a90e2;
             font-weight: bold;
             text-align: center;
-            line-height: 0.9;
+            line-height: 1;
         }
         
         /* Phần từ gợi ý trong câu hỏi */
@@ -282,25 +294,25 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 0 6px;
+            padding: 0 1vw;
             min-width: 0;
         }
         
         .question {
-            font-size: 1.2rem;
+            font-size: min(3vh, 3.5vw, 2rem);
             color: #333;
             font-weight: bold;
             text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
-            margin-bottom: 2px;
+            margin-bottom: 0.5vh;
             word-break: break-word;
             line-height: 1.1;
         }
         
         .question-hint {
-            font-size: 0.65rem;
+            font-size: min(1.5vh, 1.8vw, 0.9rem);
             color: #ff6b6b;
             font-weight: bold;
-            line-height: 0.9;
+            line-height: 1;
         }
         
         /* Ô trống trong câu hỏi */
@@ -309,28 +321,28 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 3px;
-            margin-left: 4px;
+            gap: 0.5vh;
+            margin-left: 1vw;
         }
         
         .answer-label {
-            font-size: 0.65rem;
+            font-size: min(1.5vh, 1.8vw, 0.9rem);
             color: #4a90e2;
             font-weight: bold;
             text-align: center;
-            line-height: 0.9;
+            line-height: 1;
         }
         
         .answer-slot {
-            width: 40px;
-            height: 40px;
+            width: min(7vh, 7vw, 60px);
+            height: min(7vh, 7vw, 60px);
             border-radius: 8px;
             background: linear-gradient(145deg, #e8f4ff, #d4eaff);
             border: 1.5px solid #4a90e2;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.3rem;
+            font-size: min(3vh, 3.5vw, 2rem);
             font-weight: bold;
             color: #4a90e2;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -347,7 +359,7 @@
         .keywords-grid {
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 2vh;
             flex: 1;
             justify-content: space-around;
         }
@@ -356,31 +368,32 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 3px;
-            padding: 6px;
+            gap: 0.5vh;
+            padding: 1vh 0;
             background: linear-gradient(145deg, #ffffff, #fff9e6);
             border-radius: 8px;
             border: 1.5px solid #ffd166;
             flex: 1;
+            justify-content: center;
         }
         
         .keyword-label {
-            font-size: 0.65rem;
+            font-size: min(1.5vh, 1.8vw, 0.9rem);
             color: #ff8a00;
             font-weight: bold;
             text-align: center;
-            line-height: 0.9;
+            line-height: 1;
         }
         
         .keyword-slot {
-            width: 40px;
-            height: 40px;
+            width: min(7vh, 7vw, 60px);
+            height: min(7vh, 7vw, 60px);
             border-radius: 8px;
             background: linear-gradient(145deg, #ffd166, #ffc145);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.3rem;
+            font-size: min(3vh, 3.5vw, 2rem);
             font-weight: bold;
             color: #333;
             cursor: grab;
@@ -440,19 +453,30 @@
             opacity: 0;
         }
         
-        /* Phần feedback và điều khiển - cực gọn */
+        /* Phần feedback và điều khiển */
+        .bottom-section {
+            margin-top: 1.5vh;
+            flex-shrink: 0;
+            height: 18vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
         .feedback {
             text-align: center;
-            margin: 5px 0;
-            min-height: 30px;
-            font-size: 0.85rem;
+            min-height: 5vh;
+            font-size: min(2vh, 2.2vw, 1.1rem);
             font-weight: bold;
-            padding: 6px;
+            padding: 1vh 1vw;
             border-radius: 8px;
             transition: all 0.3s;
             border: 1.5px solid transparent;
-            flex-shrink: 0;
             line-height: 1.1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1vh;
         }
         
         .correct {
@@ -476,15 +500,13 @@
         .controls {
             display: flex;
             justify-content: center;
-            gap: 8px;
-            margin-top: 5px;
-            flex-wrap: wrap;
-            flex-shrink: 0;
+            gap: 2vw;
+            flex-wrap: nowrap;
         }
         
         button {
-            padding: 8px 15px;
-            font-size: 0.85rem;
+            padding: 1.5vh 3vw;
+            font-size: min(2vh, 2.2vw, 1.1rem);
             border: none;
             border-radius: 25px;
             cursor: pointer;
@@ -492,9 +514,10 @@
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
-            min-width: 90px;
+            min-width: 0;
             box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-            flex-shrink: 0;
+            flex: 1;
+            max-width: 40%;
         }
         
         button::after {
@@ -533,37 +556,46 @@
             box-shadow: 0 6px 12px rgba(255, 154, 118, 0.5);
         }
         
+        .timer-audio-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2vw;
+            margin-top: 1vh;
+        }
+        
         .timer {
+            flex: 2;
             text-align: center;
-            margin-top: 5px;
-            font-size: 0.85rem;
+            font-size: min(1.8vh, 2vw, 1rem);
             color: #666;
             font-weight: bold;
             background: linear-gradient(145deg, #ffffff, #f0f9ff);
-            padding: 6px;
+            padding: 1vh 1vw;
             border-radius: 8px;
             border: 1.5px solid #ffd166;
-            flex-shrink: 0;
             line-height: 1.1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .timer span {
             color: #ff6b6b;
-            font-size: 0.95rem;
+            font-size: min(2.2vh, 2.5vw, 1.3rem);
             text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+            margin-left: 0.5vw;
         }
         
         .audio-controls {
+            flex: 1;
             display: flex;
             justify-content: center;
-            gap: 6px;
-            margin-top: 5px;
-            flex-shrink: 0;
         }
         
         .audio-btn {
-            padding: 5px 12px;
-            font-size: 0.75rem;
+            padding: 1vh 2vw;
+            font-size: min(1.6vh, 1.8vw, 0.9rem);
             background: linear-gradient(145deg, #9d4edd, #8a2be2);
             color: white;
             border-radius: 20px;
@@ -571,7 +603,7 @@
             cursor: pointer;
             box-shadow: 0 3px 6px rgba(157, 78, 221, 0.3);
             transition: all 0.3s;
-            flex-shrink: 0;
+            width: 100%;
         }
         
         .audio-btn:hover {
@@ -582,14 +614,14 @@
         /* Thêm hiệu ứng cho chữ cái khi kéo */
         .drag-ghost {
             position: fixed;
-            width: 40px;
-            height: 40px;
+            width: min(7vh, 7vw, 60px);
+            height: min(7vh, 7vw, 60px);
             border-radius: 8px;
             background: linear-gradient(145deg, #ffd166, #ffc145);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.3rem;
+            font-size: min(3vh, 3.5vw, 2rem);
             font-weight: bold;
             color: #333;
             pointer-events: none;
@@ -600,169 +632,90 @@
             transition: transform 0.1s;
         }
         
-        /* ========== RESPONSIVE ĐƠN GIẢN ========== */
-        
-        /* Điện thoại dọc - chuyển sang 1 cột */
-        @media (max-width: 600px) and (orientation: portrait) {
-            .game-area {
-                flex-direction: column;
-                gap: 6px;
+        /* Đảm bảo luôn là 2 hàng trên mọi thiết bị */
+        @media (orientation: portrait) {
+            .container {
+                padding: 1.5vh 3vw;
             }
             
-            .questions-section, .keywords-section {
-                width: 100%;
-                max-width: 100%;
+            .game-area {
+                flex-direction: column;
+                gap: 1.5vh;
+                height: calc(100vh - 12vh - 6vh - 1.5vh - 1.5vh - 20vh);
+            }
+            
+            .questions-section {
+                flex: 2;
             }
             
             .keywords-section {
-                padding: 6px;
+                flex: 1;
                 max-width: 100%;
+                flex-direction: row;
+                padding: 1vh 2vw;
             }
             
             .keywords-grid {
                 flex-direction: row;
-                gap: 8px;
+                width: 100%;
+                gap: 2vw;
             }
             
             .keyword-item {
                 flex: 1;
-                min-width: 0;
+                padding: 1vh 0;
             }
             
-            h1 {
-                font-size: 1.2rem;
-            }
-            
-            .title-icon {
-                font-size: 1.1rem;
-            }
-            
-            .subtitle {
-                font-size: 0.8rem;
-            }
-        }
-        
-        /* Điện thoại ngang - giữ bố cục ngang nhưng nhỏ hơn */
-        @media (max-width: 850px) and (orientation: landscape) {
-            .container {
-                padding: 6px;
+            .keywords-title {
+                margin-bottom: 0;
+                margin-right: 2vw;
+                font-size: min(2vh, 2.5vw, 1.2rem);
+                white-space: nowrap;
             }
             
             .question-item {
-                min-height: 50px;
-                padding: 4px;
+                min-height: 12vh;
             }
             
-            .image-container {
-                width: 40px;
-                height: 40px;
-            }
-            
-            .question {
-                font-size: 1rem;
-            }
-            
-            .answer-slot, .keyword-slot {
-                width: 35px;
-                height: 35px;
-                font-size: 1.1rem;
-            }
-            
-            .drag-ghost {
-                width: 35px;
-                height: 35px;
-                font-size: 1.1rem;
-            }
-            
-            .keywords-section {
-                max-width: 100px;
-            }
-            
-            h1 {
-                font-size: 1.1rem;
+            .bottom-section {
+                height: 20vh;
             }
         }
         
-        /* iPad - bố cục ngang với kích thước vừa */
-        @media (min-width: 768px) {
-            .container {
-                padding: 12px;
-            }
-            
-            .question-item {
-                min-height: 70px;
-                padding: 8px;
-            }
-            
-            .image-container {
-                width: 60px;
-                height: 60px;
-            }
-            
-            .question {
-                font-size: 1.4rem;
-            }
-            
-            .answer-slot, .keyword-slot {
-                width: 45px;
-                height: 45px;
-                font-size: 1.5rem;
-            }
-            
-            .drag-ghost {
-                width: 45px;
-                height: 45px;
-                font-size: 1.5rem;
-            }
-            
-            .keywords-section {
-                max-width: 140px;
-                padding: 10px;
-            }
-            
-            h1 {
-                font-size: 1.6rem;
-            }
-            
-            .title-icon {
-                font-size: 1.5rem;
-            }
-            
-            .subtitle {
-                font-size: 1rem;
-            }
-        }
-        
-        /* Màn hình rất nhỏ */
+        /* Cho màn hình rất nhỏ */
         @media (max-height: 500px) {
+            .header {
+                height: 10vh;
+            }
+            
+            .instructions {
+                height: 5vh;
+                margin-bottom: 1vh;
+            }
+            
+            .game-area {
+                height: calc(100vh - 10vh - 5vh - 1vh - 1vh - 15vh);
+            }
+            
             .question-item {
-                min-height: 45px;
+                min-height: 10vh;
+                padding: 0.5vh 0.5vw;
             }
             
-            .image-container {
-                width: 35px;
-                height: 35px;
+            .bottom-section {
+                height: 15vh;
             }
             
-            .question {
-                font-size: 0.9rem;
+            h1 {
+                font-size: min(2.5vh, 3vw, 1.5rem);
             }
-            
-            .answer-slot, .keyword-slot {
-                width: 30px;
-                height: 30px;
-                font-size: 1rem;
-            }
-            
-            .drag-ghost {
-                width: 30px;
-                height: 30px;
-                font-size: 1rem;
-            }
-            
-            .keywords-section {
-                max-width: 90px;
-                padding: 5px;
+        }
+        
+        /* Cho màn hình rất rộng */
+        @media (min-width: 1200px) {
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
             }
         }
     </style>
@@ -791,16 +744,14 @@
                                  alt="Con gà" 
                                  loading="lazy">
                         </div>
-                        <div class="image-label">Con gà</div>
                     </div>
                     
                     <div class="question-text">
                         <div class="question">...on gà</div>
-                        <div class="question-hint">Điền chữ cái</div>
+                        <div class="question-hint">Tìm chữ cái phù hợp</div>
                     </div>
                     
                     <div class="answer-slot-container">
-                        <div class="answer-label">Ô trống</div>
                         <div class="answer-slot" id="answer-1"></div>
                     </div>
                 </div>
@@ -813,16 +764,14 @@
                                  alt="In màu" 
                                  loading="lazy">
                         </div>
-                        <div class="image-label">In màu</div>
                     </div>
                     
                     <div class="question-text">
                         <div class="question">...n màu</div>
-                        <div class="question-hint">Điền chữ cái</div>
+                        <div class="question-hint">Tìm chữ cái phù hợp</div>
                     </div>
                     
                     <div class="answer-slot-container">
-                        <div class="answer-label">Ô trống</div>
                         <div class="answer-slot" id="answer-2"></div>
                     </div>
                 </div>
@@ -835,16 +784,14 @@
                                  alt="Tàu hỏa" 
                                  loading="lazy">
                         </div>
-                        <div class="image-label">Tàu hỏa</div>
                     </div>
                     
                     <div class="question-text">
                         <div class="question">...àu hỏa</div>
-                        <div class="question-hint">Điền chữ cái</div>
+                        <div class="question-hint">Tìm chữ cái phù hợp</div>
                     </div>
                     
                     <div class="answer-slot-container">
-                        <div class="answer-label">Ô trống</div>
                         <div class="answer-slot" id="answer-3"></div>
                     </div>
                 </div>
@@ -852,43 +799,44 @@
             
             <!-- Phần keywords bên phải - THỨ TỰ: T > C > I -->
             <div class="keywords-section">
-                <div class="keywords-title">Chữ cái</div>
+                <div class="keywords-title">Chữ cái gợi ý</div>
                 <div class="keywords-grid">
                     <!-- Keyword 1: T (Tàu hỏa) -->
                     <div class="keyword-item">
-                        <div class="keyword-label">Kéo vào</div>
                         <div class="keyword-slot" id="keyword-3" data-letter="t">T</div>
                     </div>
                     
                     <!-- Keyword 2: C (Con gà) -->
                     <div class="keyword-item">
-                        <div class="keyword-label">Kéo vào</div>
                         <div class="keyword-slot" id="keyword-1" data-letter="c">C</div>
                     </div>
                     
                     <!-- Keyword 3: I (In màu) -->
                     <div class="keyword-item">
-                        <div class="keyword-label">Kéo vào</div>
                         <div class="keyword-slot" id="keyword-2" data-letter="i">I</div>
                     </div>
                 </div>
             </div>
         </div>
         
-        <div class="feedback" id="feedback"></div>
-        
-        <div class="controls">
-            <button id="check-btn">✅ Kiểm tra</button>
-            <button id="reset-btn">🔄 Làm lại</button>
-        </div>
-        
-        <div class="timer">
-            ⏱️ Thời gian: <span id="timer">0.0</span>s
-        </div>
-        
-        <!-- Audio controls -->
-        <div class="audio-controls">
-            <button class="audio-btn" id="mute-btn">🔇 Tắt nhạc</button>
+        <div class="bottom-section">
+            <div class="feedback" id="feedback"></div>
+            
+            <div class="controls">
+                <button id="check-btn">✅ Kiểm tra</button>
+                <button id="reset-btn">🔄 Làm lại</button>
+            </div>
+            
+            <div class="timer-audio-section">
+                <div class="timer">
+                    ⏱️ Thời gian: <span id="timer">0.0</span>s
+                </div>
+                
+                <!-- Audio controls -->
+                <div class="audio-controls">
+                    <button class="audio-btn" id="mute-btn">🔇 Tắt nhạc</button>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -1387,8 +1335,13 @@
         
         // Fix height cho mobile browsers
         function setFullHeight() {
-            const vh = window.innerHeight * 0.01;
-            document.documentElement.style.setProperty('--vh', `${vh}px`);
+            document.documentElement.style.height = '100%';
+            document.body.style.height = '100%';
+            const container = document.querySelector('.container');
+            if (container) {
+                const availableHeight = window.innerHeight;
+                container.style.height = availableHeight + 'px';
+            }
         }
         
         window.addEventListener('resize', setFullHeight);
